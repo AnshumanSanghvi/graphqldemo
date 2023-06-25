@@ -26,6 +26,19 @@ public class EmbeddedIdConverter implements BackendIdConverter {
 
     private final ObjectMapper objectMapper;
 
+    private static boolean isEmbeddedIdAnnotationPresent(Class<?> entity) {
+        return getFieldWithEmbeddedAnnotation(entity)
+                .isPresent();
+    }
+
+    @NotNull
+    private static Optional<Field> getFieldWithEmbeddedAnnotation(Class<?> entity) {
+        return Arrays.stream(entity.getDeclaredFields())
+                .filter(method -> method.isAnnotationPresent(EmbeddedId.class))
+                .findFirst();
+    }
+
+    @SuppressWarnings("rawtypes")
     @Override
     public Serializable fromRequestId(final String id, final Class<?> entityType) {
         return getFieldWithEmbeddedAnnotation(entityType)
@@ -54,17 +67,5 @@ public class EmbeddedIdConverter implements BackendIdConverter {
     @Override
     public boolean supports(final Class<?> aClass) {
         return isEmbeddedIdAnnotationPresent(aClass);
-    }
-
-    private static boolean isEmbeddedIdAnnotationPresent(Class<?> entity) {
-        return getFieldWithEmbeddedAnnotation(entity)
-                .isPresent();
-    }
-
-    @NotNull
-    private static Optional<Field> getFieldWithEmbeddedAnnotation(Class<?> entity) {
-        return Arrays.stream(entity.getDeclaredFields())
-                .filter(method -> method.isAnnotationPresent(EmbeddedId.class))
-                .findFirst();
     }
 }

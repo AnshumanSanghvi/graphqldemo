@@ -10,6 +10,7 @@ import java.time.Instant;
  * DTO for {@link com.anshuman.graphqldemo.model.entity.Rental}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record RentalRecord(Integer id, @NotNull Instant rentalDate, Instant returnDate,
+public record RentalRecord(Integer id, @NotNull Instant rentalDate, @NotNull InventoryRecord inventory,
+        @NotNull CustomerRecord customer, Instant returnDate, @NotNull StaffRecord staff,
         @NotNull Instant lastUpdate) implements Serializable {
 }

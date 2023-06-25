@@ -12,7 +12,7 @@ import java.time.Instant;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record StaffRecord(Integer id, @NotNull @Size(max = 45) String firstName,
-        @NotNull @Size(max = 45) String lastName, @Size(max = 50) String email, @NotNull Short storeId,
-        @NotNull Boolean active, @NotNull @Size(max = 16) String username, @Size(max = 40) String password,
-        @NotNull Instant lastUpdate, byte[] picture) implements Serializable {
+        @NotNull @Size(max = 45) String lastName, @NotNull AddressRecord address, @Size(max = 50) String email,
+        @NotNull Short storeId, @NotNull Boolean active, @NotNull @Size(max = 16) String username,
+        @Size(max = 40) String password, @NotNull Instant lastUpdate, byte[] picture) implements Serializable {
 }

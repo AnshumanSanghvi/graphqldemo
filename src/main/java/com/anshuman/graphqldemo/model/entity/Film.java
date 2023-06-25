@@ -100,19 +100,6 @@ public class Film {
     @Column(name = "special_features", columnDefinition = "text")
     private String specialFeatures;
 
-    @Override
-    public boolean equals(final Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        final Film film = (Film) o;
-        return getId() != null && Objects.equals(getId(), film.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
-
     public static String getFilmDetailed(Film f) {
         StringBuilder filmSB = new StringBuilder();
         filmSB.append("{")
@@ -130,5 +117,18 @@ public class Film {
                 .append("}");
 
         return filmSB.toString();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        final Film film = (Film) o;
+        return getId() != null && Objects.equals(getId(), film.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }

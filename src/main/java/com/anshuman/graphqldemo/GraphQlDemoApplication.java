@@ -1,4 +1,3 @@
-
 package com.anshuman.graphqldemo;
 
 import org.springframework.boot.SpringApplication;

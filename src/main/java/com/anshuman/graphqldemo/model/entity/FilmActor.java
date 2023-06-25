@@ -42,13 +42,13 @@ public class FilmActor {
         return this.id.getFilmId();
     }
 
-    public Short getActorId() {
-        return this.id.getActorId();
-    }
-
     public void setFilmId(Short filmId) {
         FilmActorId id = (this.getId()) == null ? new FilmActorId() : this.getId();
         id.setFilmId(filmId);
+    }
+
+    public Short getActorId() {
+        return this.id.getActorId();
     }
 
     public void setActorId(Short actorId) {

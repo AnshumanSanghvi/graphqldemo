@@ -8,9 +8,10 @@ import java.io.Serializable;
 import java.time.Instant;
 
 /**
- * DTO for {@link com.anshuman.graphqldemo.model.entity.City}
+ * DTO for {@link com.anshuman.graphqldemo.model.entity.RottenTomatoesRating}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record CityRecord(Integer id, @NotNull @Size(max = 50) String city, @NotNull CountryRecord country,
+public record RottenTomatoesRatingRecord(Integer id, @NotNull @Size(max = 25) String rottenTomatoesId,
+        @NotNull Float rottenTomatoesRating, @NotNull Integer filmId,
         @NotNull Instant lastUpdate) implements Serializable {
 }
