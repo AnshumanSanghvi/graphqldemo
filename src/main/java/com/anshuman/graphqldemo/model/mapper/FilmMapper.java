@@ -4,6 +4,8 @@ import com.anshuman.graphqldemo.model.entity.Film;
 import com.anshuman.graphqldemo.resource.dto.FilmRecord;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING,
         uses = {LanguageMapper.class, FilmCategoryMapper.class, FilmActorMapper.class, InventoryMapper.class})
 public interface FilmMapper {
@@ -25,6 +27,8 @@ public interface FilmMapper {
     }
 
     FilmRecord toDto(Film film);
+
+    List<FilmRecord> toDtoList(List<Film> films);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Film partialUpdate(FilmRecord filmRecord, @MappingTarget Film film);

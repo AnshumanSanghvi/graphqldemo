@@ -5,7 +5,7 @@ import com.anshuman.graphqldemo.resource.dto.FilmActorRecord;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {FilmActorIdMapper.class})
+        uses = {FilmActorIdMapper.class, ActorMapper.class, FilmMapper.class})
 public interface FilmActorMapper {
     FilmActor toEntity(FilmActorRecord filmActorRecord);
 

@@ -12,5 +12,6 @@ import java.time.Instant;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public record FilmActorRecord(@NotNull FilmActorIdRecord id, @NotNull Instant lastUpdate) implements Serializable {
+public record FilmActorRecord(@NotNull FilmActorIdRecord id, ActorRecord actorRecord,
+        FilmRecord filmRecord, @NotNull Instant lastUpdate) implements Serializable {
 }

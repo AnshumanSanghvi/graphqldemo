@@ -30,6 +30,12 @@ public class FilmCategory {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
+    @MapsId("categoryId")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    @ToString.Exclude
+    private Category category;
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
