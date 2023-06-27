@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Set;
 
 /**
  * DTO for {@link com.anshuman.graphqldemo.model.entity.Actor}
@@ -15,6 +14,5 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public record ActorRecord(Integer id, @NotNull @Size(max = 45) String firstName,
-        @NotNull @Size(max = 45) String lastName, @NotNull Instant lastUpdate,
-        Set<FilmActorRecord> filmActors) implements Serializable {
+        @NotNull @Size(max = 45) String lastName, @NotNull Instant lastUpdate) implements Serializable {
 }

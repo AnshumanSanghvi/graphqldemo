@@ -33,43 +33,43 @@ public class FilmGQController {
     }
 
     @SchemaMapping
-    public FilmCategoryIdRecord filmCategoryId(FilmCategoryRecord filmCategoryRecord) {
-        return filmCategoryRecord.id();
+    public FilmCategoryIdRecord filmCategoryId(FilmCategoryRecord filmCategory) {
+        return filmCategory.id();
     }
 
     @SchemaMapping
-    public CategoryRecord category(FilmCategoryRecord filmCategoryRecord) {
-        return filmCategoryRecord.categoryRecord();
+    public CategoryRecord category(FilmCategoryRecord filmCategory) {
+        return filmCategory.category();
     }
 
     @SchemaMapping
-    public FilmRecord film(FilmCategoryRecord filmCategoryRecord) {
-        return filmCategoryRecord.filmRecord();
+    public FilmRecord film(FilmCategoryRecord filmCategory) {
+        return filmCategory.film();
     }
 
     @SchemaMapping
-    public Set<FilmActorRecord> filmActors(FilmRecord filmRecord) {
-        return filmRecord.filmActors();
+    public Set<FilmActorRecord> filmActors(FilmRecord film) {
+        return film.filmActors();
     }
 
     @SchemaMapping
-    public FilmActorIdRecord filmActorId(FilmActorRecord filmActorRecord) {
-        return filmActorRecord.id();
+    public FilmActorIdRecord filmActorId(FilmActorRecord filmActor) {
+        return filmActor.id();
     }
 
     @SchemaMapping
-    public ActorRecord actor(FilmActorRecord filmActorRecord) {
-        return filmActorRecord.actorRecord();
+    public ActorRecord actor(FilmActorRecord filmActor) {
+        return filmActor.actor();
     }
 
     @SchemaMapping
-    public FilmRecord film(FilmActorRecord filmActorRecord) {
-        return filmActorRecord.filmRecord();
+    public FilmRecord film(FilmActorRecord filmActor) {
+        return filmActor.film();
     }
 
     @SchemaMapping
-    public Set<InventoryRecord> inventories(FilmRecord filmRecord) {
-        return filmRecord.inventories();
+    public Set<InventoryRecord> inventories(FilmRecord film) {
+        return film.inventories();
     }
 
 }
