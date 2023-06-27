@@ -5,10 +5,11 @@ import com.anshuman.graphqldemo.resource.dto.FilmCategoryRecord;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING,
-        uses = {FilmCategoryIdMapper.class, CategoryMapper.class, FilmMapper.class})
+        uses = {FilmCategoryIdMapper.class, CategoryMapper.class})
 public interface FilmCategoryMapper {
     FilmCategory toEntity(FilmCategoryRecord filmCategoryRecord);
 
+    @Mapping(ignore = true, target = "film")
     FilmCategoryRecord toDto(FilmCategory filmCategory);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

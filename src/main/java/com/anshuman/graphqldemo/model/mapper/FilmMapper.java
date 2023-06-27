@@ -26,6 +26,7 @@ public interface FilmMapper {
         film.getInventories().forEach(inventory -> inventory.setFilm(film));
     }
 
+    @Mapping(ignore = true, target = "inventories")
     FilmRecord toDto(Film film);
 
     List<FilmRecord> toDtoList(List<Film> films);
