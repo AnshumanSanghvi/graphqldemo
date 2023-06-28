@@ -4,9 +4,11 @@ import com.anshuman.graphqldemo.model.entity.Store;
 import com.anshuman.graphqldemo.model.repository.projection.StoreStaffProjection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+@RepositoryRestResource
 public interface StoreRepository extends ListCrudRepository<Store, Integer> {
 
     @Query(value =

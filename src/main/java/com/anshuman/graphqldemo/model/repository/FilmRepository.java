@@ -3,9 +3,11 @@ package com.anshuman.graphqldemo.model.repository;
 import com.anshuman.graphqldemo.model.entity.Film;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
 
+@RepositoryRestResource
 public interface FilmRepository extends ListCrudRepository<Film, Integer> {
 
     @Query(value =
