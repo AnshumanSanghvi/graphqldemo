@@ -60,6 +60,13 @@ type Actor {
     filmActor: [FilmActor]
 }
 
+type ActorInfo {
+    actorId: Int!
+    firstName: String!
+    lastName: String!
+    filmInfo: String
+}
+
 type ImdbRating {
     id: Int!
     imdbId: String!
@@ -77,4 +84,7 @@ type RottenTomatoesRating {
 type Query {
     ## query using JPQL query
     getFilmsByTitle(title: String!): [Film]
+
+    ## query on view, multiple parameters, pagination
+    getActorInfoByName(pageNumber: Int!, pageSize: Int!, name: String!): [ActorInfo]
 }
