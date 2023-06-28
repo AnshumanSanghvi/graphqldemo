@@ -5,6 +5,9 @@ logging:
 server:
   port: 8081
 spring:
+  data:
+    rest:
+      base-path: rest
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/dvdrental?logUnclosedConnections=true&currentSchema=public&reWriteBatchedInserts=true
