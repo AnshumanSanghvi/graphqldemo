@@ -30,7 +30,7 @@
         <postgres.version>42.6.0</postgres.version>
         <snake-yaml.version>2.0</snake-yaml.version>
         <spring-boot.version>3.1.0</spring-boot.version>
-        <spring-data-rest-hal-browser.version>3.3.9.RELEASE</spring-data-rest-hal-browser.version>
+        <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
     </properties>
 
     <dependencies>
@@ -66,9 +66,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-rest-hal-browser</artifactId>
-            <version>${spring-data-rest-hal-browser.version}</version>
+            <artifactId>spring-data-rest-hal-explorer</artifactId>
+            <version>${spring-data-rest-hal-explorer.version}</version>
         </dependency>
+
 
         <!-- ORM -->
         <dependency>
