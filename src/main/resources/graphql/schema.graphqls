@@ -1,5 +1,5 @@
 type Film {
-    id: ID
+    id: Int!
     title: String
     description: String
     releaseYear: Int
@@ -21,50 +21,50 @@ enum MPAA_Rating {
 }
 
 type Language {
-    id: ID
+    id: Int!
     name: String
 }
 
 type FilmCategory {
-    id: FilmCategoryId
+    id: FilmCategoryId!
     film: Film
     category: Category
 }
 
 type FilmCategoryId {
-    film_id: Int
-    category_id: Int
+    film_id: Int!
+    category_id: Int!
 }
 
 type Category {
-    id: ID
+    id: Int!
     name: String
     filmCategories: [FilmCategory]
 }
 
 type FilmActor {
-    id: FilmActorId
+    id: FilmActorId!
     film: Film
     actor: Actor
 }
 
 type FilmActorId {
-    actor_id: Int
-    film_id: Int
+    actor_id: Int!
+    film_id: Int!
 }
 
 type Actor {
-    id: ID
+    id: Int!
     firstName: String!
     lastName: String!
     filmActor: [FilmActor]
 }
 
 type ImdbRating {
-    id: ID
-    imdbId: String
+    id: Int!
+    imdbId: String!
     filmId: Int!
-    imdbRating: Float
+    imdbRating: Float!
 }
 
 type RottenTomatoesRating {
@@ -75,5 +75,6 @@ type RottenTomatoesRating {
 }
 
 type Query {
+    ## query using JPQL query
     getFilmsByTitle(title: String!): [Film]
 }
