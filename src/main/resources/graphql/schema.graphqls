@@ -127,4 +127,7 @@ type Query {
 
     ## query on view, multiple parameters, pagination
     getActorInfoByName(pageNumber: Int!, pageSize: Int!, name: String!): [ActorInfo]
+
+    ## query that calls a postgresql function (sp) using hibernate native query
+    getInventoryInStock(filmId: Int!, storeId: Int!): [Int]
 }
