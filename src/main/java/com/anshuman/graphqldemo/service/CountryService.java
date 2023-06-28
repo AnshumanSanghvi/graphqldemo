@@ -5,6 +5,7 @@ import com.anshuman.graphqldemo.model.mapper.CountryMapper;
 import com.anshuman.graphqldemo.model.repository.CountryRepository;
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CountryService {
 
     private final CountryRepository countryRepository;
@@ -22,5 +24,15 @@ public class CountryService {
         Country country = new Country(countryId.incrementAndGet(), name,
                 Instant.now());
         return countryMapper.toDto(countryRepository.save(country));
+    }
+
+    public boolean deleteCountry(final Integer countryId) {
+        try {
+            countryRepository.deleteById(countryId);
+            return !countryRepository.existsById(countryId);
+        } catch (Exception ex) {
+            log.error("exception encountered when deleting country with id: {}", countryId, ex);
+            return false;
+        }
     }
 }

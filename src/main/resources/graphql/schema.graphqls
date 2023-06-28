@@ -134,5 +134,8 @@ type Query {
 
 type Mutation {
     # createCustomer(storeId: Int!, firstName: String!, lastName: String!, email: String!) : Customer
+
     createCountry(name: String!): Country
+
+    deleteCountry(countryId: Int!): Boolean
 }
