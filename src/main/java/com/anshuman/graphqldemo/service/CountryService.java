@@ -7,6 +7,7 @@ import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -14,18 +15,21 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(readOnly = true)
 public class CountryService {
 
     private final CountryRepository countryRepository;
     private final AtomicInteger countryId = new AtomicInteger(300);
     private final CountryMapper countryMapper;
 
+    @Transactional
     public CountryRecord createCountry(String name) {
         Country country = new Country(countryId.incrementAndGet(), name,
                 Instant.now());
         return countryMapper.toDto(countryRepository.save(country));
     }
 
+    @Transactional
     public boolean deleteCountry(final Integer countryId) {
         try {
             countryRepository.deleteById(countryId);
