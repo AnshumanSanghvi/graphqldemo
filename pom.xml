@@ -29,7 +29,7 @@
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <postgres.version>42.6.0</postgres.version>
         <snake-yaml.version>2.0</snake-yaml.version>
-        <spring-boot.version>3.1.0</spring-boot.version>
+        <spring-boot.version>3.1.1</spring-boot.version>
         <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
     </properties>
 
