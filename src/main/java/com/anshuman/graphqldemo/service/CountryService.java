@@ -22,6 +22,12 @@ public class CountryService {
     private final AtomicInteger countryId = new AtomicInteger(300);
     private final CountryMapper countryMapper;
 
+    public CountryRecord findById(Integer countryId) {
+        return countryRepository.findById(countryId)
+                .map(countryMapper::toDto)
+                .orElse(null);
+    }
+
     @Transactional
     public CountryRecord createCountry(String name) {
         Country country = new Country(countryId.incrementAndGet(), name,

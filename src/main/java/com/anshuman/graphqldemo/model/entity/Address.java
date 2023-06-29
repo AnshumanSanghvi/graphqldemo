@@ -69,4 +69,13 @@ public class Address {
     public int hashCode() {
         return getClass().hashCode();
     }
+
+    public Address(final Integer id, @NotNull final String address, final String address2, @NotNull final String district, final String postalCode, @NotNull final String phone) {
+        this.id = id;
+        this.address = address;
+        this.address2 = address2;
+        this.district = district;
+        this.postalCode = postalCode;
+        this.phone = phone;
+    }
 }

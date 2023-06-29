@@ -130,6 +130,9 @@ type Query {
 
     ## query that calls a postgresql function (sp) using hibernate native query
     getInventoryInStock(filmId: Int!, storeId: Int!): [Int]
+
+    ## query that calls fields only when asked
+    getAddressById(addressId: Int!): Address
 }
 
 type Mutation {

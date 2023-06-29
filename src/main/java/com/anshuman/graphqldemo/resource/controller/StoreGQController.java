@@ -1,6 +1,8 @@
 package com.anshuman.graphqldemo.resource.controller;
 
-import com.anshuman.graphqldemo.resource.dto.*;
+import com.anshuman.graphqldemo.resource.dto.AddressRecord;
+import com.anshuman.graphqldemo.resource.dto.StoreRecord;
+import com.anshuman.graphqldemo.resource.dto.StoreStaffRecord;
 import com.anshuman.graphqldemo.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -26,18 +28,8 @@ public class StoreGQController {
         return storeService.getStoreStaffById(storeId);
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "Store", field = "address")
     public AddressRecord address(StoreRecord store) {
         return store.address();
-    }
-
-    @SchemaMapping
-    public CityRecord city(AddressRecord address) {
-        return address.city();
-    }
-
-    @SchemaMapping
-    public CountryRecord country(CityRecord city) {
-        return city.country();
     }
 }
