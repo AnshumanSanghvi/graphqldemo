@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "4703bf6d-de1f-47c7-ac6f-03b14b79b721",
+		"name": "DvdRentalGraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"item": [
+				{
+					"name": "Create Country",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation MyMutation($countryName: String!) {\n  createCountry(name: $countryName) {\n    id\n    country\n  }\n}",
+								"variables": "{\n  \"countryName\": \"LaLaLand\"\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Country",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation MyMutation($countryName: String!) {\n  createCountry(name: $countryName) {\n    id\n    country\n  }\n}",
+										"variables": "{\n  \"countryName\": \"LaLaLand\"\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Jun 2023 07:13:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"createCountry\": {\n            \"id\": 303,\n            \"country\": \"LaLaLand\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Read",
+			"item": [
+				{
+					"name": "GetFilmsDetailByTitle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery($title: String!) {\n  getFilmsByTitle(title: $title) {\n    id\n    title\n    rating\n    releaseYear\n    length\n    language {\n      name\n    }\n    description\n    filmCategories {\n      category {\n        name\n      }\n    }\n    filmActors {\n      actor {\n        firstName\n        lastName\n      }\n    }\n  }  \n}",
+								"variables": "{\n    \"title\" : \"Dinosaur\"\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetFilmsDetailByTitle",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery($title: String!) {\n  getFilmsByTitle(title: $title) {\n    id\n    title\n    rating\n    releaseYear\n    length\n    language {\n      name\n    }\n    description\n    filmCategories {\n      category {\n        name\n      }\n    }\n    filmActors {\n      actor {\n        firstName\n        lastName\n      }\n    }\n  }  \n}",
+										"variables": "{\n    \"title\" : \"Dinosaur\"\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Jun 2023 10:23:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getFilmsByTitle\": [\n            {\n                \"id\": \"1\",\n                \"title\": \"Academy Dinosaur\",\n                \"rating\": \"PG\",\n                \"releaseYear\": 2006,\n                \"length\": 86,\n                \"language\": {\n                    \"name\": \"English\"\n                },\n                \"description\": \"A Epic Drama of a Feminist And a Mad Scientist who must Battle a Teacher in The Canadian Rockies\",\n                \"filmCategories\": [\n                    {\n                        \"category\": {\n                            \"name\": \"Documentary\"\n                        }\n                    }\n                ],\n                \"filmActors\": [\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Penelope\",\n                            \"lastName\": \"Guiness\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Sandra\",\n                            \"lastName\": \"Peck\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Warren\",\n                            \"lastName\": \"Nolte\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Rock\",\n                            \"lastName\": \"Dukakis\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Christian\",\n                            \"lastName\": \"Gable\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Johnny\",\n                            \"lastName\": \"Cage\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Mary\",\n                            \"lastName\": \"Keitel\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Mena\",\n                            \"lastName\": \"Temple\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Lucille\",\n                            \"lastName\": \"Tracy\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Oprah\",\n                            \"lastName\": \"Kilmer\"\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": \"131\",\n                \"title\": \"Center Dinosaur\",\n                \"rating\": \"PG\",\n                \"releaseYear\": 2006,\n                \"length\": 152,\n                \"language\": {\n                    \"name\": \"English\"\n                },\n                \"description\": \"A Beautiful Character Study of a Sumo Wrestler And a Dentist who must Find a Dog in California\",\n                \"filmCategories\": [\n                    {\n                        \"category\": {\n                            \"name\": \"Classics\"\n                        }\n                    }\n                ],\n                \"filmActors\": [\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Fay\",\n                            \"lastName\": \"Winslet\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Ed\",\n                            \"lastName\": \"Guiness\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Alec\",\n                            \"lastName\": \"Wayne\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Geoffrey\",\n                            \"lastName\": \"Heston\"\n                        }\n                    }\n                ]\n            },\n            {\n                \"id\": \"231\",\n                \"title\": \"Dinosaur Secretary\",\n                \"rating\": \"R\",\n                \"releaseYear\": 2006,\n                \"length\": 63,\n                \"language\": {\n                    \"name\": \"English\"\n                },\n                \"description\": \"A Action-Packed Drama of a Feminist And a Girl who must Reach a Robot in The Canadian Rockies\",\n                \"filmCategories\": [\n                    {\n                        \"category\": {\n                            \"name\": \"Family\"\n                        }\n                    }\n                ],\n                \"filmActors\": [\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Lucille\",\n                            \"lastName\": \"Tracy\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Burt\",\n                            \"lastName\": \"Dukakis\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Russell\",\n                            \"lastName\": \"Bacall\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Jayne\",\n                            \"lastName\": \"Neeson\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Minnie\",\n                            \"lastName\": \"Kilmer\"\n                        }\n                    },\n                    {\n                        \"actor\": {\n                            \"firstName\": \"Penelope\",\n                            \"lastName\": \"Monroe\"\n                        }\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GetStoreStaffByStoreId",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery($storeId: Int!) {\n  getStaffByStoreId(storeId: $storeId){\n    storeId\n    staffNames\n    country\n    city\n    district\n  }  \n}",
+								"variables": "{\n    \"storeId\": 2\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetStoreStaffByStoreId",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery($storeId: Int!) {\n  getStaffByStoreId(storeId: $storeId){\n    storeId\n    staffNames\n    country\n    city\n    district\n  }  \n}",
+										"variables": "{\n    \"storeId\": 2\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Jun 2023 10:35:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getStaffByStoreId\": [\n            {\n                \"storeId\": 2,\n                \"staffNames\": [\n                    \"Jon Stephens\"\n                ],\n                \"country\": \"Australia\",\n                \"city\": \"Woodridge\",\n                \"district\": \"QLD\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GetStoreWithAddressByCountry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery($country: String!) {\n    getStoreWithAddressByCountry(country: $country) {\n        id\n        address {\n        district\n        city {\n            city\n            country {\n            country\n            }\n        }\n        }\n    }\n}",
+								"variables": "{\n    \"country\": \"Canada\"\n}\n"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetStoreWithAddressByCountry",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery($country: String!) {\n    getStoreWithAddressByCountry(country: $country) {\n        id\n        address {\n        district\n        city {\n            city\n            country {\n            country\n            }\n        }\n        }\n    }\n}",
+										"variables": "{\n    \"country\": \"Canada\"\n}\n"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Jun 2023 11:43:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getStoreWithAddressByCountry\": [\n            {\n                \"id\": 1,\n                \"address\": {\n                    \"district\": \"Alberta\",\n                    \"city\": {\n                        \"city\": \"Lethbridge\",\n                        \"country\": {\n                            \"country\": \"Canada\"\n                        }\n                    }\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GetActorInfoByName",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "\nquery MyQuery($pageNo: Int!, $pageSize: Int!, $actorName: String!) {\n  getActorInfoByName(pageNumber: $pageNo, pageSize: $pageSize, name: $actorName){\n    actorId\n    firstName\n    lastName\n    filmInfo    \n  }\n}\n",
+								"variables": "{  \n  \"pageNo\": 0,\n  \"pageSize\": 10,\n  \"actorName\": \"Christian\"\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GetActorInfoByName",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "\nquery MyQuery($pageNo: Int!, $pageSize: Int!, $actorName: String!) {\n  getActorInfoByName(pageNumber: $pageNo, pageSize: $pageSize, name: $actorName){\n    actorId\n    firstName\n    lastName\n    filmInfo    \n  }\n}\n",
+										"variables": "{  \n  \"pageNo\": 0,\n  \"pageSize\": 10,\n  \"actorName\": \"Christian\"\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Jun 2023 12:17:27 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getActorInfoByName\": [\n            {\n                \"actorId\": 10,\n                \"firstName\": \"Christian\",\n                \"lastName\": \"Gable\",\n                \"filmInfo\": \"Action: Lord Arizona, Waterfront Deliverance, Animation: Punk Divorce, Children: Crooked Frogmen, Classics: Jeepers Wedding, Prejudice Oleander, Comedy: Life Twisted, Documentary: Academy Dinosaur, Mod Secretary, Wedding Apollo, Drama: Goldfinger Sensibility, Foreign: Usual Untouchables, Games: Divine Resurrection, Horror: Alabama Devil, Reap Unfaithful, Music: Jawbreaker Brooklyn, Wizard Coldblooded, Won Dares, New: Dragonfly Strangers, Sci-Fi: Vacation Boondock, Sports: Shakespeare Saddle, Travel: Trouble Date\"\n            },\n            {\n                \"actorId\": 58,\n                \"firstName\": \"Christian\",\n                \"lastName\": \"Akroyd\",\n                \"filmInfo\": \"Action: Hills Neighbors, Magnolia Forrester, Animation: Doors President, Luke Mummy, Children: Backlash Undefeated, Betrayed Rear, Maker Gables, Sabrina Midnight, Classics: Million Ace, Comedy: Caper Motions, Doom Dancing, Operation Operation, Submarine Bed, Documentary: Cupboard Sinners, Princess Giant, Family: Confused Candles, Foreign: Catch Amistad, Innocent Usual, Reservoir Adaptation, Games: Feathers Metal, Fire Wolves, Horror: Sinners Atlantis, Streetcar Intentions, Music: Home Pity, Jawbreaker Brooklyn, New: Maiden Home, Nuts Ties, Oklahoma Jumanji, Sci-Fi: Divide Monster, Mourning Purple, Sports: Chance Resurrection, Driver Annie\"\n            },\n            {\n                \"actorId\": 61,\n                \"firstName\": \"Christian\",\n                \"lastName\": \"Neeson\",\n                \"filmInfo\": \"Animation: Horn Working, Oz Liaisons, Punk Divorce, Children: Hollywood Anonymous, Classics: Lover Truman, Drama: Mob Duffel, Savannah Town, Family: Opposite Necklace, Sensibility Rear, Splash Gump, Games: Glory Tracy, Lambs Cincinatti, Horror: Love Suicides, World Leathernecks, Music: Runner Madigan, Scalawag Duck, Sci-Fi: Divide Monster, Graffiti Love, Spirited Casualties, Sports: Divorce Shining, Graceland Dynamite, Liberty Magnificent, Travel: Fellowship Autumn, Liaisons Sweet, Outlaw Hanky\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "getInventoryInStock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query MyQuery($filmId: Int!, $storeId: Int!) {\n  getInventoryInStock(filmId: $filmId, storeId: $storeId)\n}",
+								"variables": "{  \n  \"filmId\": 42,\n  \"storeId\": 2\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "getInventoryInStock",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query MyQuery($filmId: Int!, $storeId: Int!) {\n  getInventoryInStock(filmId: $filmId, storeId: $storeId)\n}",
+										"variables": "{  \n  \"filmId\": 42,\n  \"storeId\": 2\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 27 Jun 2023 12:41:47 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"getInventoryInStock\": [\n            185,\n            186,\n            187,\n            188\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"item": []
+		},
+		{
+			"name": "Delete",
+			"item": [
+				{
+					"name": "deleteCountry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation MyMutation($countryId: Int!) {\n  deleteCountry(countryId: $countryId)\n}",
+								"variables": "{\n    \"countryId\": 301\n}"
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/graphql",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation MyMutation($countryId: Int!) {\n  deleteCountry(countryId: $countryId)\n}",
+										"variables": "{\n    \"countryId\": 301\n}"
+									}
+								},
+								"url": {
+									"raw": "localhost:8081/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8081",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Jun 2023 07:11:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"deleteCountry\": true\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

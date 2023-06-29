@@ -1,0 +1,144 @@
+type Film {
+    id: Int!
+    title: String
+    description: String
+    releaseYear: Int
+    length: Int
+    specialFeatures: [String]
+    fullText: String
+    rating: MPAA_Rating
+    language: Language
+    filmCategories: [FilmCategory]
+    filmActors: [FilmActor]
+}
+
+enum MPAA_Rating {
+    R
+    G
+    PG
+    PG_13
+    NC_17
+}
+
+type Language {
+    id: Int!
+    name: String
+}
+
+type FilmCategory {
+    id: FilmCategoryId!
+    film: Film
+    category: Category
+}
+
+type FilmCategoryId {
+    film_id: Int!
+    category_id: Int!
+}
+
+type Category {
+    id: Int!
+    name: String
+    filmCategories: [FilmCategory]
+}
+
+type FilmActor {
+    id: FilmActorId!
+    film: Film
+    actor: Actor
+}
+
+type FilmActorId {
+    actor_id: Int!
+    film_id: Int!
+}
+
+type Actor {
+    id: Int!
+    firstName: String!
+    lastName: String!
+    filmActor: [FilmActor]
+}
+
+type ActorInfo {
+    actorId: Int!
+    firstName: String!
+    lastName: String!
+    filmInfo: String
+}
+
+type ImdbRating {
+    id: Int!
+    imdbId: String!
+    filmId: Int!
+    imdbRating: Float!
+}
+
+type RottenTomatoesRating {
+    filmId: Int!
+    id: ID!
+    rottenTomatoesId: String!
+    rottenTomatoesRating: Float!
+}
+
+type Store {
+    id: Int!
+    address: Address
+}
+
+type Address {
+    id: Int!
+    address: String!
+    address2: String
+    district: String
+    city: City!
+    postalCode: String
+    phone: String
+}
+
+type City {
+    id: Int!
+    city: String!
+    country: Country!
+}
+
+type Country {
+    id: Int!
+    country: String!
+}
+
+type StoreStaff {
+    storeId: Int!
+    district: String
+    city: String
+    country: String
+    staffNames: [String]
+}
+
+type Query {
+    ## query using JPQL query
+    getFilmsByTitle(title: String!): [Film]
+
+    ## query on a different root node
+    getStoreWithAddressByCountry(country: String!): [Store]
+
+    ## query using spring data jpa projections
+    getStaffByStoreId(storeId: Int!): [StoreStaff]
+
+    ## query on view, multiple parameters, pagination
+    getActorInfoByName(pageNumber: Int!, pageSize: Int!, name: String!): [ActorInfo]
+
+    ## query that calls a postgresql function (sp) using hibernate native query
+    getInventoryInStock(filmId: Int!, storeId: Int!): [Int]
+
+    ## query that calls fields only when asked
+    getAddressById(addressId: Int!): Address
+}
+
+type Mutation {
+    # createCustomer(storeId: Int!, firstName: String!, lastName: String!, email: String!) : Customer
+
+    createCountry(name: String!): Country
+
+    deleteCountry(countryId: Int!): Boolean
+}
