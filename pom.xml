@@ -31,6 +31,7 @@
         <snake-yaml.version>2.0</snake-yaml.version>
         <spring-boot.version>3.1.1</spring-boot.version>
         <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -41,7 +42,7 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- graphql stuff -->
+        <!-- graphql -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-graphql</artifactId>
@@ -70,13 +71,12 @@
             <version>${spring-data-rest-hal-explorer.version}</version>
         </dependency>
 
-
         <!-- ORM -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <!-- ORM: for datatype jsonb support -->
+        <!-- ORM: for datatype tsvector support -->
         <dependency>
             <groupId>com.vladmihalcea</groupId>
             <artifactId>hibernate-types-60</artifactId>
@@ -122,6 +122,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <!-- dev tools -->

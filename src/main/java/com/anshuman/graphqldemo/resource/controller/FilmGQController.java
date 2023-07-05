@@ -19,7 +19,7 @@ public class FilmGQController {
 
     @QueryMapping
     public List<FilmRecord> getFilmsByTitle(@Argument String title) {
-        return filmService.getFilmById(title);
+        return filmService.getFilmsByTitle(title);
     }
 
     @SchemaMapping

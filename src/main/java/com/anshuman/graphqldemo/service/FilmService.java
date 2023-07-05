@@ -17,7 +17,7 @@ public class FilmService {
     private final FilmRepository filmRepository;
     private final FilmMapper filmMapper;
 
-    public List<FilmRecord> getFilmById(String title) {
+    public List<FilmRecord> getFilmsByTitle(String title) {
         return filmMapper.toDtoList(filmRepository.customGetFilmDetailed(title));
     }
 }
