@@ -2,6 +2,7 @@ logging:
   level:
     org.springframework: INFO
     org.springframework.graphql: DEBUG
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
 server:
   port: 8081
 spring:
