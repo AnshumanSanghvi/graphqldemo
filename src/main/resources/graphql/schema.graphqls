@@ -142,3 +142,8 @@ type Mutation {
 
     deleteCountry(countryId: Int!): Boolean
 }
+
+type Subscription {
+    getNumber: Int
+    getCountrySubscription: Country
+}

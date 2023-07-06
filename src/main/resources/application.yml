@@ -9,11 +9,28 @@ spring:
   data:
     rest:
       base-path: rest
+    r2dbc:
+      repositories:
+        enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/dvdrental?logUnclosedConnections=true&currentSchema=public&reWriteBatchedInserts=true
     username: anshuman
     password: anshuman
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
+    schema:
+      introspection:
+        enabled: true
+      printer:
+        enabled: true
+    websocket:
+      path: /graphql
+    cors:
+      allowed-origins: "*"
+      allowed-headers: "*"
   jackson:
     default-property-inclusion: non_null
     deserialization:
@@ -36,3 +53,7 @@ spring:
   mvc:
     converters:
       preferred-json-mapper: jackson
+  r2dbc:
+    password: anshuman
+    username: anshuman
+    url: r2dbc:postgresql://localhost:5432/dvdrental?logUnclosedConnections=true&currentSchema=public&reWriteBatchedInserts=true

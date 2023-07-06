@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -16,6 +17,7 @@ import javax.sql.DataSource;
 @Configuration
 @EntityScan(basePackages = {"com.anshuman.graphqldemo.model.entity"})
 @EnableJpaRepositories(basePackages = {"com.anshuman.graphqldemo.model.repository"})
+@EnableR2dbcRepositories(basePackages = {"com.anshuman.graphqldemo.model.reactive"})
 public class DataSourceConfig {
 
     /**

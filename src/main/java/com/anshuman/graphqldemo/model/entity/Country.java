@@ -20,6 +20,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "country", schema = "public")
+@org.springframework.data.relational.core.mapping.Table(name = "country", schema = "public")
 public class Country {
     @Id
     @Column(name = "country_id", nullable = false)

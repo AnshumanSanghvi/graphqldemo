@@ -21,6 +21,7 @@
 
         <!-- dependency versions -->
         <aspectj.version>1.9.19</aspectj.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
         <graphql-java.version>20.4</graphql-java.version>
         <graphql-spqr-spring-boot-starter.version>0.0.7</graphql-spqr-spring-boot-starter.version>
         <hibernate-types.version>2.21.1</hibernate-types.version>
@@ -28,10 +29,10 @@
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <postgres.version>42.6.0</postgres.version>
+        <r2dbc-postgresql.version>1.0.1.RELEASE</r2dbc-postgresql.version>
         <snake-yaml.version>2.0</snake-yaml.version>
         <spring-boot.version>3.1.1</spring-boot.version>
         <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -40,6 +41,17 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- web: reactive support -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>${spring-boot.version}</version>
         </dependency>
 
         <!-- graphql -->
@@ -76,6 +88,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- ORM: reactive support -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+        </dependency>
         <!-- ORM: for datatype tsvector support -->
         <dependency>
             <groupId>com.vladmihalcea</groupId>
@@ -93,6 +110,13 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- database: reactive support -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>r2dbc-postgresql</artifactId>
+            <version>${r2dbc-postgresql.version}</version>
             <scope>runtime</scope>
         </dependency>
 
