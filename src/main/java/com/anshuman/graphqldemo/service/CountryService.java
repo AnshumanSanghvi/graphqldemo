@@ -6,6 +6,7 @@ import com.anshuman.graphqldemo.model.repository.CountryRepository;
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ public class CountryService {
     private final AtomicInteger countryId = new AtomicInteger(300);
     private final CountryMapper countryMapper;
 
+    @Cacheable(value = "countries", key = "#countryId")
     public CountryRecord findById(Integer countryId) {
         return countryRepository.findById(countryId)
                 .map(countryMapper::toDto)
