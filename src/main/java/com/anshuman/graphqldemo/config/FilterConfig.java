@@ -1,11 +1,13 @@
 package com.anshuman.graphqldemo.config;
 
+import com.anshuman.graphqldemo.resource.filter.GraphQLFilter;
+import graphql.execution.preparsed.persisted.PersistedQueryCache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
-public class RequestLoggingConfig {
+public class FilterConfig {
 
     @Bean
     public CommonsRequestLoggingFilter logFilter() {
@@ -20,5 +22,10 @@ public class RequestLoggingConfig {
         filter.setAfterMessagePrefix("||");
         filter.setAfterMessageSuffix("||");
         return filter;
+    }
+
+    @Bean
+    public GraphQLFilter graphQLFilter(PersistedQueryCache persistedQueryCache) {
+        return new GraphQLFilter(persistedQueryCache);
     }
 }
