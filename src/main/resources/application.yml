@@ -3,6 +3,7 @@ logging:
     org.springframework: INFO
     org.springframework.graphql: DEBUG
     org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    com.anshuman.graphqldemo: DEBUG
 server:
   port: 8081
 spring:
