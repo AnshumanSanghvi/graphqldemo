@@ -13,8 +13,8 @@ public class StringUtil {
         return Optional.ofNullable(object)
                 .map(Object::toString)
                 .filter(Predicate.not(String::isBlank))
-                .map(str -> str.substring(1, Math.min(str.length() - 1, maxLength)))
-                .map(str -> str.length() >= 999 ? str + "..." : str)
+                .map(str -> str.substring(0, Math.min(str.length() - 1, maxLength)))
+                .map(str -> str.length() >= (maxLength - 1) ? str + "..." : str)
                 .orElse("");
     }
 }

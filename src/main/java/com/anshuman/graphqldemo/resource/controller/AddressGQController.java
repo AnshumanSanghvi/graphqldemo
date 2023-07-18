@@ -2,12 +2,11 @@ package com.anshuman.graphqldemo.resource.controller;
 
 import com.anshuman.graphqldemo.model.repository.projection.AddressProjection;
 import com.anshuman.graphqldemo.model.repository.projection.CityProjection;
-import com.anshuman.graphqldemo.model.repository.projection.IAddressProjection;
-import com.anshuman.graphqldemo.model.repository.projection.ICityProjection;
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import com.anshuman.graphqldemo.service.AddressService;
 import com.anshuman.graphqldemo.service.CityService;
 import com.anshuman.graphqldemo.service.CountryService;
+import com.anshuman.graphqldemo.util.ProfileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -28,23 +27,29 @@ public class AddressGQController {
 
     @QueryMapping
     public AddressProjection getAddressById(@Argument Integer addressId) {
+        final String taskName = "getAddressById" + addressId;
         var projection = addressService.gqlFindById(addressId);
-        return IAddressProjection.toPojo(projection);
+        return ProfileUtil.future(projection, taskName);
     }
 
     @QueryMapping
     public List<AddressProjection> getAddresses() {
-        return addressService.gqlFindAll();
+        final String taskName = "getAddresses";
+        var projectionFuture = addressService.gqlFindAll();
+        return ProfileUtil.future(projectionFuture, taskName);
     }
 
     @SchemaMapping(typeName = "Address", value = "city")
     public CityProjection city(AddressProjection address) {
-        var projection = cityService.gqlFindById(address.getCityId());
-        return ICityProjection.toPojo(projection);
+        final String taskName = "getCityById" + address.getCityId();
+        var projectionFuture = cityService.gqlFindById(address.getCityId());
+        return ProfileUtil.future(projectionFuture, taskName);
     }
 
     @SchemaMapping(typeName = "City", value = "country")
     public CountryRecord country(CityProjection city) {
-        return countryService.gqlFindById(city.getCountryId());
+        final String taskName = "getCountryById" + city.getCountryId();
+        var projectionFuture = countryService.gqlFindById(city.getCountryId());
+        return ProfileUtil.future(projectionFuture, taskName);
     }
 }
