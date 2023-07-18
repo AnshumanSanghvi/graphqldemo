@@ -1,4 +1,4 @@
-package com.anshuman.graphqldemo.model.entity.Converter;
+package com.anshuman.graphqldemo.model.entity.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

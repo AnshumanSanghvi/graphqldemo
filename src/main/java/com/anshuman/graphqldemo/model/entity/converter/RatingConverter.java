@@ -1,4 +1,4 @@
-package com.anshuman.graphqldemo.model.entity.Converter;
+package com.anshuman.graphqldemo.model.entity.converter;
 
 import com.anshuman.graphqldemo.data.enums.MPAA_Rating;
 import jakarta.persistence.AttributeConverter;

@@ -1,7 +1,7 @@
 package com.anshuman.graphqldemo.model.entity;
 
 import com.anshuman.graphqldemo.data.enums.MPAA_Rating;
-import com.anshuman.graphqldemo.model.entity.Converter.RatingConverter;
+import com.anshuman.graphqldemo.model.entity.converter.RatingConverter;
 import com.vladmihalcea.hibernate.type.search.PostgreSQLTSVectorType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
