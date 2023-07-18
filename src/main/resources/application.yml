@@ -1,9 +1,9 @@
 logging:
   level:
     org.springframework: INFO
-    org.springframework.graphql: DEBUG
-    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
-    com.anshuman.graphqldemo: DEBUG
+    org.springframework.graphql: INFO
+    org.springframework.web.filter.CommonsRequestLoggingFilter: INFO
+    com.anshuman.graphqldemo: INFO
 server:
   port: 8081
 spring:
