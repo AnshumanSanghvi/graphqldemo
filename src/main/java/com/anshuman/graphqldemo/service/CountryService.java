@@ -26,10 +26,8 @@ public class CountryService {
     private final CountryMapper countryMapper;
 
     @Cacheable(value = "countries", key = "#countryId")
-    public CountryRecord findById(Integer countryId) {
-        return countryRepository.findById(countryId)
-                .map(countryMapper::toDto)
-                .orElse(null);
+    public CountryRecord gqlFindById(Integer countryId) {
+        return countryMapper.toDto(countryRepository.gqlFindById(countryId));
     }
 
     @Transactional(transactionManager = "JpaTransactionManager")

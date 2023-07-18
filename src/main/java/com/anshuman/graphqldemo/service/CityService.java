@@ -16,6 +16,6 @@ public class CityService {
 
     @Cacheable(value = "cities", key = "#cityId")
     public ICityProjection gqlFindById(Integer cityId) {
-        return cityRepository.gqlFindById(cityId);
+        return ICityProjection.toPojo(cityRepository.gqlFindById(cityId));
     }
 }

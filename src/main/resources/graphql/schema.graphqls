@@ -133,6 +133,9 @@ type Query {
 
     ## query that calls fields only when asked
     getAddressById(addressId: Int!): Address
+
+    ## retrieve query data asynchronously
+    getAddresses: [Address]
 }
 
 type Mutation {

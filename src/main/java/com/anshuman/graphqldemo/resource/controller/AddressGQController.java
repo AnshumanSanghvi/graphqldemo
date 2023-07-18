@@ -9,13 +9,17 @@ import com.anshuman.graphqldemo.service.AddressService;
 import com.anshuman.graphqldemo.service.CityService;
 import com.anshuman.graphqldemo.service.CountryService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class AddressGQController {
 
     private final AddressService addressService;
@@ -28,6 +32,11 @@ public class AddressGQController {
         return IAddressProjection.toPojo(projection);
     }
 
+    @QueryMapping
+    public List<AddressProjection> getAddresses() {
+        return addressService.gqlFindAll();
+    }
+
     @SchemaMapping(typeName = "Address", value = "city")
     public CityProjection city(AddressProjection address) {
         var projection = cityService.gqlFindById(address.getCityId());
@@ -36,6 +45,6 @@ public class AddressGQController {
 
     @SchemaMapping(typeName = "City", value = "country")
     public CountryRecord country(CityProjection city) {
-        return countryService.findById(city.getCountryId());
+        return countryService.gqlFindById(city.getCountryId());
     }
 }

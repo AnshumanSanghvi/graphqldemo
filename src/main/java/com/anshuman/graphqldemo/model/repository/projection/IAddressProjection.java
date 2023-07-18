@@ -1,5 +1,7 @@
 package com.anshuman.graphqldemo.model.repository.projection;
 
+import java.util.List;
+
 public interface IAddressProjection {
 
     Integer getId();
@@ -20,5 +22,9 @@ public interface IAddressProjection {
         return new AddressProjection(projection.getId(), projection.getAddress(),
                 projection.getAddress2(), projection.getDistrict(), projection.getCityId(),
                 projection.getPostalCode(), projection.getPhone());
+    }
+
+    public static List<AddressProjection> toPojoList(List<IAddressProjection> projectionList) {
+        return projectionList.stream().map(IAddressProjection::toPojo).toList();
     }
 }
