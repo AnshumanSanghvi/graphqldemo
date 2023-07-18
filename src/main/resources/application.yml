@@ -58,3 +58,6 @@ spring:
     password: anshuman
     username: anshuman
     url: r2dbc:postgresql://localhost:5432/dvdrental?logUnclosedConnections=true&currentSchema=public&reWriteBatchedInserts=true
+    name: dvdrental
+    pool:
+      enabled: true

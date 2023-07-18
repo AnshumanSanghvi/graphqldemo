@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-@Transactional(readOnly = true)
+@Transactional(readOnly = true, transactionManager = "JpaTransactionManager")
 public class CountryService {
 
     private final CountryRepository countryRepository;
@@ -30,14 +30,14 @@ public class CountryService {
                 .orElse(null);
     }
 
-    @Transactional
+    @Transactional(transactionManager = "JpaTransactionManager")
     public CountryRecord createCountry(String name) {
         Country country = new Country(countryId.incrementAndGet(), name,
                 Instant.now());
         return countryMapper.toDto(countryRepository.save(country));
     }
 
-    @Transactional
+    @Transactional(transactionManager = "JpaTransactionManager")
     public boolean deleteCountry(final Integer countryId) {
         try {
             countryRepository.deleteById(countryId);
