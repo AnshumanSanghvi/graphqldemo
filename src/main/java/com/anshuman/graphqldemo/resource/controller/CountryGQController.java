@@ -24,4 +24,9 @@ public class CountryGQController {
         return countryService.deleteCountry(countryId);
     }
 
+    @MutationMapping
+    public CountryRecord updateCountry(@Argument @NotNull Integer id, @Argument @NotNull String name) {
+        return countryService.updateCountry(id, name);
+    }
+
 }

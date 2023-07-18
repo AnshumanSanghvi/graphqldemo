@@ -4,6 +4,8 @@ import com.anshuman.graphqldemo.model.entity.Country;
 import com.anshuman.graphqldemo.model.mapper.CountryMapper;
 import com.anshuman.graphqldemo.model.repository.CountryRepository;
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -46,5 +48,18 @@ public class CountryService {
             log.error("exception encountered when deleting country with id: {}", countryId, ex);
             return false;
         }
+    }
+
+    @Transactional(transactionManager = "JpaTransactionManager")
+    public CountryRecord updateCountry(@NotNull Integer id, @NotNull @NotEmpty String name) {
+        return countryRepository
+                .findById(id)
+                .map(country -> {
+                    country.setCountry(name);
+                    return country;
+                })
+                .map(countryRepository::save)
+                .map(countryMapper::toDto)
+                .orElse(null);
     }
 }
