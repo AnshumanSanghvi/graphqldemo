@@ -17,8 +17,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/dvdrental?logUnclosedConnections=true&currentSchema=public&reWriteBatchedInserts=true
-    username: anshuman
-    password: anshuman
+    username: postgres
+    password: postgres
   graphql:
     graphiql:
       enabled: true

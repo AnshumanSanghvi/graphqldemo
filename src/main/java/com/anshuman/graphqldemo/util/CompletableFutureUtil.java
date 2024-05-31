@@ -17,7 +17,7 @@ public class CompletableFutureUtil {
         // use statically
     }
 
-    public static <T> T withTryCatch(CompletableFuture<T> future, String taskName) {
+    public static <T> T withTryCatchAndTimeLimit(CompletableFuture<T> future, String taskName) {
         try {
             withLogging(future, taskName);
             return future.get(30, TimeUnit.SECONDS);

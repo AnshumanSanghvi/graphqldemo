@@ -20,11 +20,11 @@ public class CountryGQController {
     public CountryRecord getCountryById(@Argument @NotNull Integer countryId) {
         final String taskName = "getCountryById" + countryId;
         var projectionFuture = countryService.gqlFindById(countryId);
-        return ProfileUtil.future(projectionFuture,taskName);
+        return ProfileUtil.future(projectionFuture, taskName);
     }
 
     @MutationMapping
-    public CountryRecord createCountry(@Argument @NotEmpty  String name) {
+    public CountryRecord createCountry(@Argument @NotEmpty String name) {
         return countryService.createCountry(name);
     }
 

@@ -35,13 +35,13 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
                 knownQueries.keySet()
                         .stream()
                         .map(Object::toString)
-                        .map(key -> truncate(key,100))
+                        .map(key -> truncate(key, 100))
                         .collect(joining(", ")));
 
         String response = knownQueries.get(request.getId());
         if (response != null) {
             log.info("Fetching query response for request Id: {} from cache: {}", request.getId(),
-                    truncate(response,500));
+                    truncate(response, 500));
         }
     }
 

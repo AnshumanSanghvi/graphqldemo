@@ -14,7 +14,8 @@ import java.util.Optional;
 @Data
 public class StoreStaffProjection {
 
-    @NotNull private Integer storeId;
+    @NotNull
+    private Integer storeId;
     private String district;
     private String city;
     private String country;

@@ -1,7 +1,7 @@
 <Configuration monitorInterval="60" status="WARN">
     <Properties>
         <Property name="LOG_PATH">./logs/</Property>
-        <Property name="LOG_FILE_NAME">statemachine</Property>
+        <Property name="LOG_FILE_NAME">graphql</Property>
         <Property name="LOG_FILE_DATE">${date:yyyy-MM-dd}</Property>
         <Property name="LOG_FILE_NAME_EXT">.log/</Property>
         <Property name="MONITOR_LOG_FILE_NAME">monitor</Property>

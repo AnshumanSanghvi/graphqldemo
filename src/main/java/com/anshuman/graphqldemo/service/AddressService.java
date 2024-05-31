@@ -17,7 +17,8 @@ import java.util.concurrent.Executor;
 public class AddressService {
 
     private final AddressRepository addressRepository;
-    @Qualifier("APIThreadExecutor") private final Executor executor;
+    @Qualifier("APIThreadExecutor")
+    private final Executor executor;
 
     public AddressService(AddressRepository addressRepository, @Qualifier("APIThreadExecutor") Executor executor) {
         this.addressRepository = addressRepository;
