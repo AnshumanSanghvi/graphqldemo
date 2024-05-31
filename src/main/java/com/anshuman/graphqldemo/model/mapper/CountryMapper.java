@@ -1,7 +1,6 @@
 package com.anshuman.graphqldemo.model.mapper;
 
 import com.anshuman.graphqldemo.model.entity.Country;
-import com.anshuman.graphqldemo.model.reactive.CountryReactiveEntity;
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import org.mapstruct.*;
 
@@ -13,6 +12,4 @@ public interface CountryMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Country partialUpdate(CountryRecord countryRecord, @MappingTarget Country country);
-
-    CountryRecord toDto(CountryReactiveEntity country);
 }

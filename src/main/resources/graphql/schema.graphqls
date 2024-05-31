@@ -152,5 +152,4 @@ type Mutation {
 
 type Subscription {
     getNumber: Int
-    getCountrySubscription: Country
 }

@@ -1,6 +1,5 @@
 package com.anshuman.graphqldemo.config;
 
-import com.anshuman.graphqldemo.annotation.Reactive;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -35,7 +34,6 @@ import java.util.concurrent.Executors;
 @EntityScan(basePackages = {"com.anshuman.graphqldemo.model.entity"})
 @EnableJpaRepositories(
         basePackages = {"com.anshuman.graphqldemo.model.repository"},
-        excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Reactive.class),
         entityManagerFactoryRef = "JpaEntityManagerFactory",
         transactionManagerRef = "JpaTransactionManager")
 @EnableTransactionManagement

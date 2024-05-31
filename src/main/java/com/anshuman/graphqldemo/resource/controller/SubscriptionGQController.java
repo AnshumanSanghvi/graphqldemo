@@ -1,7 +1,5 @@
 package com.anshuman.graphqldemo.resource.controller;
 
-import com.anshuman.graphqldemo.resource.dto.CountryRecord;
-import com.anshuman.graphqldemo.service.CountryReactiveService;
 import lombok.RequiredArgsConstructor;
 import org.reactivestreams.Publisher;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
@@ -16,7 +14,7 @@ import java.util.stream.Stream;
 public class SubscriptionGQController {
 
     private static final AtomicInteger number = new AtomicInteger(0);
-    private final CountryReactiveService countryService;
+//    private final CountryReactiveService countryService;
 
     @SubscriptionMapping
     public Publisher<Integer> getNumber() {
@@ -34,9 +32,9 @@ public class SubscriptionGQController {
         }
     }
 
-    @SubscriptionMapping
-    public Publisher<CountryRecord> getCountrySubscription() {
-        return countryService.getCountries();
-    }
+//    @SubscriptionMapping
+//    public Publisher<CountryRecord> getCountrySubscription() {
+//        return countryService.getCountries();
+//    }
 
 }
