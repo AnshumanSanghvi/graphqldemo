@@ -63,7 +63,7 @@ public class JpaDataSourceConfig {
 
     @Bean(name = "JpaAsyncTaskExecutor")
     public AsyncTaskExecutor taskExecutor() {
-        Executor executor = Executors.newCachedThreadPool();
+        Executor executor = Executors.newVirtualThreadPerTaskExecutor();
         return new ConcurrentTaskExecutor(executor);
     }
 
