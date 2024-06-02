@@ -102,6 +102,12 @@
             <version>${hibernate.validator.version}</version>
         </dependency>
 
+        <!-- Spring AOP -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+
         <!-- database -->
         <dependency>
             <groupId>org.postgresql</groupId>

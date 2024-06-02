@@ -6,7 +6,7 @@ import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import com.anshuman.graphqldemo.service.AddressService;
 import com.anshuman.graphqldemo.service.CityService;
 import com.anshuman.graphqldemo.service.CountryService;
-import com.anshuman.graphqldemo.util.ProfileUtil;
+import com.anshuman.graphqldemo.util.CompletableFutureUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -28,28 +28,28 @@ public class AddressGQController {
     @QueryMapping
     public AddressProjection getAddressById(@Argument Integer addressId) {
         final String taskName = "getAddressById" + addressId;
-        var projection = addressService.gqlFindById(addressId);
-        return ProfileUtil.future(projection, taskName);
+        var projectionFuture = addressService.gqlFindById(addressId);
+        return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);
     }
 
     @QueryMapping
     public List<AddressProjection> getAddresses() {
         final String taskName = "getAddresses";
         var projectionFuture = addressService.gqlFindAll();
-        return ProfileUtil.future(projectionFuture, taskName);
+        return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);
     }
 
     @SchemaMapping(typeName = "Address", value = "city")
     public CityProjection city(AddressProjection address) {
         final String taskName = "getCityById" + address.getCityId();
         var projectionFuture = cityService.gqlFindById(address.getCityId());
-        return ProfileUtil.future(projectionFuture, taskName);
+        return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);
     }
 
     @SchemaMapping(typeName = "City", value = "country")
     public CountryRecord country(CityProjection city) {
         final String taskName = "getCountryById" + city.getCountryId();
         var projectionFuture = countryService.gqlFindById(city.getCountryId());
-        return ProfileUtil.future(projectionFuture, taskName);
+        return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);
     }
 }

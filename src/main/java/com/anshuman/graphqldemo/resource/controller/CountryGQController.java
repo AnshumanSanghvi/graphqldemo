@@ -2,7 +2,7 @@ package com.anshuman.graphqldemo.resource.controller;
 
 import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import com.anshuman.graphqldemo.service.CountryService;
-import com.anshuman.graphqldemo.util.ProfileUtil;
+import com.anshuman.graphqldemo.util.CompletableFutureUtil;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class CountryGQController {
     public CountryRecord getCountryById(@Argument @NotNull Integer countryId) {
         final String taskName = "getCountryById" + countryId;
         var projectionFuture = countryService.gqlFindById(countryId);
-        return ProfileUtil.future(projectionFuture, taskName);
+        return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);
     }
 
     @MutationMapping
