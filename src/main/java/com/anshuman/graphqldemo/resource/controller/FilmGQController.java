@@ -1,7 +1,7 @@
 package com.anshuman.graphqldemo.resource.controller;
 
 import com.anshuman.graphqldemo.resource.dto.*;
-import com.anshuman.graphqldemo.service.FilmService;
+import com.anshuman.graphqldemo.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -16,60 +16,55 @@ import java.util.Set;
 public class FilmGQController {
 
     private final FilmService filmService;
+    private final LanguageService languageService;
+    private final FilmCategoryService filmCategoryService;
+    private final CategoryService categoryService;
+    private final FilmActorService filmActorService;
+    private final ActorService actorService;
+
+    @QueryMapping
+    public List<FilmRecord> getFilmsDetailedByTitle(@Argument String title) {
+        return filmService.getFilmsDetailedByTitle(title);
+    }
 
     @QueryMapping
     public List<FilmRecord> getFilmsByTitle(@Argument String title) {
         return filmService.getFilmsByTitle(title);
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "Film", value = "language")
     public LanguageRecord language(FilmRecord filmRecord) {
-        return filmRecord.language();
+        return languageService.getLanguageById(filmRecord.language().id());
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "Film", value = "filmCategories")
     public Set<FilmCategoryRecord> filmCategories(FilmRecord filmRecord) {
-        return filmRecord.filmCategories();
+        return filmCategoryService.getFilmCategoryByFilmId(filmRecord.id());
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "FilmCategory", value = "id")
     public FilmCategoryIdRecord filmCategoryId(FilmCategoryRecord filmCategory) {
         return filmCategory.id();
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "FilmCategory", value = "category")
     public CategoryRecord category(FilmCategoryRecord filmCategory) {
-        return filmCategory.category();
+        return categoryService.getCategoryById(Integer.valueOf(filmCategory.id().categoryId()));
     }
 
-    @SchemaMapping
-    public FilmRecord film(FilmCategoryRecord filmCategory) {
-        return filmCategory.film();
+    @SchemaMapping(typeName = "Film", value = "filmActors")
+    public Set<FilmActorRecord> filmActors(FilmRecord filmRecord) {
+        return filmActorService.getFilmActorByFilmId(filmRecord.id());
     }
 
-    @SchemaMapping
-    public Set<FilmActorRecord> filmActors(FilmRecord film) {
-        return film.filmActors();
-    }
-
-    @SchemaMapping
+    @SchemaMapping(typeName = "FilmActor", value = "id")
     public FilmActorIdRecord filmActorId(FilmActorRecord filmActor) {
         return filmActor.id();
     }
 
-    @SchemaMapping
+    @SchemaMapping(typeName = "FilmActor", value = "actor")
     public ActorRecord actor(FilmActorRecord filmActor) {
-        return filmActor.actor();
-    }
-
-    @SchemaMapping
-    public FilmRecord film(FilmActorRecord filmActor) {
-        return filmActor.film();
-    }
-
-    @SchemaMapping
-    public Set<InventoryRecord> inventories(FilmRecord film) {
-        return film.inventories();
+        return actorService.getByActorId(filmActor.id().actorId());
     }
 
 }

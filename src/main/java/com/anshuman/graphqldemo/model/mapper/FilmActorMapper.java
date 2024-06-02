@@ -4,6 +4,8 @@ import com.anshuman.graphqldemo.model.entity.FilmActor;
 import com.anshuman.graphqldemo.resource.dto.FilmActorRecord;
 import org.mapstruct.*;
 
+import java.util.Set;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING,
         uses = {FilmActorIdMapper.class, ActorMapper.class})
 public interface FilmActorMapper {
@@ -14,4 +16,6 @@ public interface FilmActorMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     FilmActor partialUpdate(FilmActorRecord filmActorRecord, @MappingTarget FilmActor filmActor);
+
+    Set<FilmActorRecord> toDtoSet(Set<FilmActor> filmActors);
 }

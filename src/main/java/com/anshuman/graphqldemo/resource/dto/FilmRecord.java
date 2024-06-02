@@ -17,8 +17,10 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public record FilmRecord(Integer id, @NotNull @Size(max = 255) String title, String description, Integer releaseYear,
-        @NotNull LanguageRecord language, @NotNull Short rentalDuration, @NotNull BigDecimal rentalRate, Short length,
-        @NotNull BigDecimal replacementCost, @NotNull Instant lastUpdate, @NotNull String fulltext,
-        Set<FilmCategoryRecord> filmCategories, @NotNull Set<FilmActorRecord> filmActors,
-        Set<InventoryRecord> inventories, MPAA_Rating rating, String specialFeatures) implements Serializable {
+                         LanguageRecord language, @NotNull Short rentalDuration, @NotNull BigDecimal rentalRate,
+                         Short length,
+                         @NotNull BigDecimal replacementCost, @NotNull Instant lastUpdate, @NotNull String fulltext,
+                         Set<FilmCategoryRecord> filmCategories, Set<FilmActorRecord> filmActors,
+                         Set<InventoryRecord> inventories, MPAA_Rating rating,
+                         String specialFeatures) implements Serializable {
 }

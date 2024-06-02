@@ -31,6 +31,14 @@ import static java.util.stream.Collectors.joining;
         @Index(name = "film_fulltext_idx", columnList = "fulltext")
 })
 public class Film {
+
+    public Film(Integer id, String title, Integer releaseYear, Short length) {
+        this.id = id;
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.length = length;
+    }
+
     @Id
     @Column(name = "film_id", nullable = false)
     private Integer id;

@@ -20,4 +20,9 @@ public interface FilmRepository extends ListCrudRepository<Film, Integer> {
                     " INNER JOIN FETCH F.language L " +
                     " WHERE F.title LIKE %:title%")
     List<Film> customGetFilmDetailed(String title);
+
+    @Query(value = " SELECT NEW com.anshuman.graphqldemo.model.entity.Film( F.id, F.title, F.releaseYear, F.length ) " +
+            " FROM Film F " +
+            " WHERE F.title like %:title% ")
+    List<Film> getFilmByTitle(String title);
 }
