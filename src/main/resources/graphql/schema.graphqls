@@ -27,7 +27,6 @@ type Language {
 
 type FilmCategory {
     id: FilmCategoryId!
-    film: Film
     category: Category
 }
 
@@ -39,12 +38,10 @@ type FilmCategoryId {
 type Category {
     id: Int!
     name: String
-    filmCategories: [FilmCategory]
 }
 
 type FilmActor {
     id: FilmActorId!
-    film: Film
     actor: Actor
 }
 
@@ -57,7 +54,6 @@ type Actor {
     id: Int!
     firstName: String!
     lastName: String!
-    filmActor: [FilmActor]
 }
 
 type ActorInfo {
