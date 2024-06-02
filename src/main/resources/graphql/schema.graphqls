@@ -115,6 +115,8 @@ type Query {
     ## query using JPQL query
     getFilmsByTitle(title: String!): [Film]
 
+    getFilmsDetailedByTitle(title: String!): [Film]
+
     ## query on a different root node
     getStoreWithAddressByCountry(country: String!): [Store]
 
