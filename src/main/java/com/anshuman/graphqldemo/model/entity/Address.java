@@ -39,7 +39,7 @@ public class Address {
     private String district;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "city_id", nullable = false)
     @ToString.Exclude
     private City city;

@@ -47,7 +47,7 @@ public class Film {
     private Integer releaseYear;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "language_id", nullable = false)
     @ToString.Exclude
     private Language language;
@@ -78,17 +78,17 @@ public class Film {
     @ToString.Exclude
     private String fulltext;
 
-    @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     @ToString.Exclude
     @Builder.Default
     private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     @ToString.Exclude
     @Builder.Default
     private Set<FilmActor> filmActors = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     @ToString.Exclude
     @Builder.Default
     private Set<Inventory> inventories = new LinkedHashSet<>();

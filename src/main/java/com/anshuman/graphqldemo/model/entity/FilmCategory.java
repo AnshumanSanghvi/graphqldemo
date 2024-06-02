@@ -21,7 +21,7 @@ public class FilmCategory {
     private FilmCategoryId id;
 
     @MapsId("filmId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "film_id", nullable = false)
     @ToString.Exclude
     private Film film;
@@ -31,7 +31,7 @@ public class FilmCategory {
     private Instant lastUpdate;
 
     @MapsId("categoryId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "category_id", nullable = false)
     @ToString.Exclude
     private Category category;

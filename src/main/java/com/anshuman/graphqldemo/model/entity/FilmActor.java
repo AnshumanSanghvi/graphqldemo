@@ -23,13 +23,13 @@ public class FilmActor {
     private FilmActorId id;
 
     @MapsId("actorId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "actor_id", nullable = false)
     @ToString.Exclude
     private Actor actor;
 
     @MapsId("filmId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "film_id", nullable = false)
     @ToString.Exclude
     private Film film;

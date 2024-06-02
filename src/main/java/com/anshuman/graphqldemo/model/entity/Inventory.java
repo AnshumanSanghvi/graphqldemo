@@ -24,7 +24,7 @@ public class Inventory {
     private Integer id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "film_id", nullable = false)
     @ToString.Exclude
     private Film film;

@@ -30,7 +30,7 @@ public class City {
     private String city;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "country_id", nullable = false)
     @ToString.Exclude
     private Country country;
