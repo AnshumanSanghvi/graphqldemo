@@ -46,26 +46,26 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
     }
 
     private static void logRequest(final WebGraphQlRequest request) {
-        log.debug("Request cookies: {}", request.getCookies());
+        log.trace("Request cookies: {}", request.getCookies());
         log.trace("Request attributes: {}", request.getAttributes());
-        log.debug("Request document: {}", request.getDocument());
+        log.trace("Request document: {}", request.getDocument());
         log.debug("Request executionId: {}", request.getExecutionId());
-        log.debug("Request extensions: {}", request.getExtensions());
-        log.debug("Request headers: {}", request.getHeaders());
+        log.trace("Request extensions: {}", request.getExtensions());
+        log.trace("Request headers: {}", request.getHeaders());
         log.debug("Request id: {}", request.getId());
-        log.debug("Request locale: {}", request.getLocale());
+        log.trace("Request locale: {}", request.getLocale());
         log.debug("Request operationName: {}", request.getOperationName());
         log.debug("Request uri: {}", request.getUri());
         log.debug("Request variables: {}", request.getVariables());
     }
 
     private static void logResponse(final WebGraphQlResponse response) {
-        log.debug("Response responseHeaders: {}", response.getResponseHeaders());
-        log.debug("Response extensions: {}", response.getExtensions());
+        log.trace("Response responseHeaders: {}", response.getResponseHeaders());
+        log.trace("Response extensions: {}", response.getExtensions());
         log.debug("Response errors: {}", response.getErrors());
-        log.debug("Response data: {}", truncate(response.getData(), 500));
+        log.debug("Response data: {}", truncate(response.getData(), 250));
         log.trace("Response executionInput: {}", response.getExecutionInput());
-        log.debug("Response executionResult: {}", response.getExecutionResult());
+        log.trace("Response executionResult: {}", response.getExecutionResult());
     }
 
     @Override

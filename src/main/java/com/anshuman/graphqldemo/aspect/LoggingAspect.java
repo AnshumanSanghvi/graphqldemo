@@ -6,36 +6,47 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Optional;
 
 @Aspect
 @Component
 @Slf4j
-public class LogControllerAspect {
+public class LoggingAspect {
 
     @Around("execution(public * com.anshuman.graphqldemo.resource.controller.*.*(..))")
     public Object controllerMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         return loggingMethod(joinPoint, "controller");
     }
 
-    @Around("this(org.springframework.data.jpa.repository.JpaRepository)")
-    public Object repositoryMethod(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("this(org.springframework.data.repository.CrudRepository)")
+    public Object crudRepositoryMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         return loggingMethod(joinPoint, "repository");
     }
 
+    @Around("this(org.springframework.data.jpa.repository.JpaRepository)")
+    public Object jpaRepositoryMethod(ProceedingJoinPoint joinPoint) throws Throwable {
+        return loggingMethod(joinPoint, "repository");
+    }
 
     private static Object loggingMethod(ProceedingJoinPoint joinPoint, String from) throws Throwable {
         Instant start = Instant.now();
         Object returnObject = joinPoint.proceed();
         Instant end = Instant.now();
+        String className = Optional.ofNullable(joinPoint.getTarget())
+                .flatMap(target -> from.equals("repository") ? Optional.ofNullable(AopProxyUtils.proxiedUserInterfaces(target)[0]) : Optional.of(target.getClass()))
+                .map(Class::getSimpleName)
+                .orElse("n/a");
+
         String methodName = joinPoint.getSignature().getName();
 
-        log.debug(from + "Method: " + methodName
-                + " args: {" + getArguments(joinPoint) + "}"
-                + ", running on Thread{type: " + (Thread.currentThread().isVirtual() ? "Virtual" : "Platform")+ ", name: "
-                + Thread.currentThread().getName() + "}"
+        log.debug(className + "." + methodName
+                + ", args: {" + getArguments(joinPoint) + "}"
+                + ", running on " + (Thread.currentThread().isVirtual() ? "Virtual thread with id:" +
+                Thread.currentThread().threadId() : "Platform thread with name: " + Thread.currentThread().getName())
                 + ", took " + (end.toEpochMilli() - start.toEpochMilli()) + " ms");
         return returnObject;
     }
