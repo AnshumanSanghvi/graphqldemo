@@ -1,8 +1,8 @@
 package com.anshuman.graphqldemo.resource.controller;
 
+import com.anshuman.graphqldemo.model.entity.Country;
 import com.anshuman.graphqldemo.model.repository.projection.AddressProjection;
 import com.anshuman.graphqldemo.model.repository.projection.CityProjection;
-import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import com.anshuman.graphqldemo.service.AddressService;
 import com.anshuman.graphqldemo.service.CityService;
 import com.anshuman.graphqldemo.service.CountryService;
@@ -47,7 +47,7 @@ public class AddressGQController {
     }
 
     @SchemaMapping(typeName = "City", value = "country")
-    public CountryRecord country(CityProjection city) {
+    public Country country(CityProjection city) {
         final String taskName = "getCountryById" + city.getCountryId();
         var projectionFuture = countryService.gqlFindById(city.getCountryId());
         return CompletableFutureUtil.withTryCatchAndTimeLimit(projectionFuture, taskName);

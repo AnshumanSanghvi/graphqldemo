@@ -172,6 +172,9 @@ type Query {
 
     ## retrieve query data asynchronously
     getCountryById(countryId: Int!): Country
+
+    ## retrieve query data asynchronously
+    getCountriesByIds(countryIds: [Int!]): [Country]
 }
 
 type Mutation {

@@ -7,14 +7,17 @@ import com.anshuman.graphqldemo.resource.dto.CountryRecord;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -25,19 +28,22 @@ public class CountryService {
     private final CountryRepository countryRepository;
     private final AtomicInteger countryId = new AtomicInteger(300);
     private final CountryMapper countryMapper;
-    private final Executor executor;
 
-    public CountryService(CountryRepository countryRepository, CountryMapper countryMapper, @Qualifier("APIThreadExecutor") Executor executor) {
+    public CountryService(CountryRepository countryRepository, CountryMapper countryMapper) {
         this.countryRepository = countryRepository;
         this.countryMapper = countryMapper;
-        this.executor = executor;
     }
 
+    @Async("APIThreadExecutor")
     @Cacheable(value = "countries", key = "#countryId")
-    public CompletableFuture<CountryRecord> gqlFindById(Integer countryId) {
-        return CompletableFuture
-                .supplyAsync(() -> countryRepository.gqlFindById(countryId), executor)
-                .thenApply(countryMapper::toDto);
+    public CompletableFuture<Country> gqlFindById(Integer countryId) {
+        return countryRepository.gqlFindById(countryId);
+    }
+
+    @Async("APIThreadExecutor")
+    @Cacheable(value = "countries")
+    public CompletableFuture<Set<Country>> gqlFindByIds(Set<Integer> countryIds) {
+        return countryRepository.gqlFindByIds(countryIds);
     }
 
     @Transactional(transactionManager = "JpaTransactionManager")
@@ -47,6 +53,7 @@ public class CountryService {
         return countryMapper.toDto(countryRepository.save(country));
     }
 
+    @CacheEvict(value = "countries", key = "#countryId")
     @Transactional(transactionManager = "JpaTransactionManager")
     public boolean deleteCountry(final Integer countryId) {
         try {
@@ -58,10 +65,12 @@ public class CountryService {
         }
     }
 
+    @Caching(put = @CachePut(value = "countries", key = "#countryId"),
+            evict = @CacheEvict(value = "countries", key = "#countryId"))
     @Transactional(transactionManager = "JpaTransactionManager")
-    public CountryRecord updateCountry(@NotNull Integer id, @NotNull @NotEmpty String name) {
+    public CountryRecord updateCountry(@NotNull Integer countryId, @NotNull @NotEmpty String name) {
         return countryRepository
-                .findById(id)
+                .findById(countryId)
                 .map(country -> {
                     country.setCountry(name);
                     return country;
