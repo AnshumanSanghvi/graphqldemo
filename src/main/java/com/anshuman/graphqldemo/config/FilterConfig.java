@@ -1,7 +1,7 @@
 package com.anshuman.graphqldemo.config;
 
 import com.anshuman.graphqldemo.resource.filter.GraphQLFilter;
-import graphql.execution.preparsed.persisted.PersistedQueryCache;
+import graphql.execution.preparsed.persisted.InMemoryPersistedQueryCache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
@@ -25,7 +25,7 @@ public class FilterConfig {
     }
 
     @Bean
-    public GraphQLFilter graphQLFilter(PersistedQueryCache persistedQueryCache) {
+    public GraphQLFilter graphQLFilter(InMemoryPersistedQueryCache persistedQueryCache) {
         return new GraphQLFilter(persistedQueryCache);
     }
 }

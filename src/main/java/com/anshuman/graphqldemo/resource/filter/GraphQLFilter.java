@@ -1,7 +1,6 @@
 package com.anshuman.graphqldemo.resource.filter;
 
 import graphql.execution.preparsed.persisted.InMemoryPersistedQueryCache;
-import graphql.execution.preparsed.persisted.PersistedQueryCache;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import static java.util.stream.Collectors.joining;
 @RequiredArgsConstructor
 public class GraphQLFilter implements WebGraphQlInterceptor {
 
-    private final PersistedQueryCache persistedQueryCache;
+    private final InMemoryPersistedQueryCache persistedQueryCache;
 
     @Override
     public @NotNull Mono<WebGraphQlResponse> intercept(final WebGraphQlRequest request, final Chain chain) {
@@ -30,7 +29,7 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
     }
 
     private void checkCacheHit(final WebGraphQlRequest request) {
-        Map<Object, String> knownQueries = ((InMemoryPersistedQueryCache) persistedQueryCache).getKnownQueries();
+        Map<Object, String> knownQueries = persistedQueryCache.getKnownQueries();
         log.debug("queries in graphql persisted query cache: {}",
                 knownQueries.keySet()
                         .stream()
