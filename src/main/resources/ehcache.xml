@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true"
+         monitoring="autodetect" dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir/ehcache" />
+
+    <defaultCache
+            maxEntriesLocalHeap="10000"
+            eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="7200"
+            diskSpoolBufferSizeMB="120"
+            overflowToDisk="true"
+            diskPersistent="true"
+            maxEntriesLocalDisk="1000000"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU" statistics="true">
+
+        <persistence strategy="localTempSwap" />
+    </defaultCache>
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache"
+           maxEntriesLocalHeap="25" eternal="false" timeToLiveSeconds="240">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+</ehcache>

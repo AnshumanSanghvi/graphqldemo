@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -16,6 +17,8 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "store", schema = "public")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Store {
     @Id
     @Column(name = "store_id", nullable = false)

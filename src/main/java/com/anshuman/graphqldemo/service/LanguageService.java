@@ -5,6 +5,7 @@ import com.anshuman.graphqldemo.model.mapper.LanguageMapper;
 import com.anshuman.graphqldemo.model.repository.LanguageRepository;
 import com.anshuman.graphqldemo.resource.dto.LanguageRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +20,12 @@ public class LanguageService {
     private final LanguageRepository languageRepository;
     private final LanguageMapper languageMapper;
 
+    @Cacheable(value = "filmLanguages", key = "#filmId")
     public LanguageRecord getLanguageByFilmId(Integer filmId) {
         return languageMapper.toDto(languageRepository.getLanguageByFilmId(filmId));
     }
 
+    @Cacheable(value = "languages", key = "#languageId")
     public LanguageRecord getLanguageRecordById(Integer languageId) {
         return languageRepository.findById(languageId)
                 .map(languageMapper::toDto)

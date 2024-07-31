@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -21,6 +22,8 @@ import java.util.Objects;
         @Index(name = "idx_fk_staff_id", columnList = "staff_id"),
         @Index(name = "idx_fk_rental_id", columnList = "rental_id")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Payment {
     @Id
     @Column(name = "payment_id", nullable = false)

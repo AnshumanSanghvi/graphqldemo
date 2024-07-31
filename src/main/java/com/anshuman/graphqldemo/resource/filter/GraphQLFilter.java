@@ -31,7 +31,7 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
 
     private void checkCacheHit(final WebGraphQlRequest request) {
         Map<Object, String> knownQueries = ((InMemoryPersistedQueryCache) persistedQueryCache).getKnownQueries();
-        log.debug("queries in cache: {}",
+        log.debug("queries in graphql persisted query cache: {}",
                 knownQueries.keySet()
                         .stream()
                         .map(Object::toString)

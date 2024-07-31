@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -21,6 +22,8 @@ import java.util.Objects;
         @Index(name = "idx_fk_store_id", columnList = "store_id"),
         @Index(name = "idx_last_name", columnList = "last_name")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Customer {
     @Id
     @Column(name = "customer_id", nullable = false)

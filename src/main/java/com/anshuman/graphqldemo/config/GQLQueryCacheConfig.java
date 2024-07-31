@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 
 @Configuration
-public class QueryCache {
+public class GQLQueryCacheConfig {
 
     @Bean
     public PersistedQueryCache persistedQueryCache() {
-        return new InMemoryPersistedQueryCache(new HashMap<Object, String>(100));
+        return new InMemoryPersistedQueryCache(new HashMap<>(100));
     }
 }

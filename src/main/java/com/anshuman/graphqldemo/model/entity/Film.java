@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
@@ -28,6 +29,8 @@ import java.util.Set;
         @Index(name = "idx_fk_language_id", columnList = "language_id"),
         @Index(name = "film_fulltext_idx", columnList = "fulltext")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Film {
 
     public Film(Integer id, String title, Integer releaseYear, Short length, Integer language) {

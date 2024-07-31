@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -19,6 +20,8 @@ import java.util.Objects;
         @Index(name = "idx_unq_rental_rental_date_inventory_id_customer_id", columnList = "rental_date, inventory_id, customer_id", unique = true),
         @Index(name = "idx_fk_inventory_id", columnList = "inventory_id")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Rental {
     @Id
     @Column(name = "rental_id", nullable = false)

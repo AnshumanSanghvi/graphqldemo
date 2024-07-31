@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -21,6 +22,8 @@ import java.util.Objects;
 @Table(name = "actor", schema = "public", indexes = {
         @Index(name = "idx_actor_last_name", columnList = "last_name")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

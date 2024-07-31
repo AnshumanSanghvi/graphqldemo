@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 
@@ -15,6 +16,8 @@ import java.time.Instant;
         @Index(name = "imdb_imdb_id_un", columnList = "imdb_id", unique = true),
         @Index(name = "imdb_film_id_un", columnList = "film_id", unique = true)
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ImdbRating {
     @Id
     @Column(name = "id", nullable = false)

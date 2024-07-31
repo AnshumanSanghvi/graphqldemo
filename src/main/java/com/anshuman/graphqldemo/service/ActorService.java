@@ -9,6 +9,7 @@ import com.anshuman.graphqldemo.model.repository.view.ActorInfoRepository;
 import com.anshuman.graphqldemo.resource.dto.ActorInfoRecord;
 import com.anshuman.graphqldemo.resource.dto.ActorRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
@@ -29,6 +30,7 @@ public class ActorService {
     private final ActorRepository actorRepository;
     private final ActorMapper actorMapper;
 
+    @Cacheable(value = "actorInfos", key = "#name")
     public List<ActorInfoRecord> getActorInfoByName(int pageNumber, int pageSize, String name) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         List<ActorInfo> actorInfoList =
@@ -38,6 +40,7 @@ public class ActorService {
         return actorInfoMapper.toDtoList(actorInfoList);
     }
 
+    @Cacheable(value = "actors", key = "#actorId")
     public ActorRecord getByActorId(int actorId) {
         return actorRepository.findById(actorId)
                 .map(actorMapper::toDto)

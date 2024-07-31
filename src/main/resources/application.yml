@@ -45,8 +45,22 @@ spring:
       ddl-auto: none
     open-in-view: false
     properties:
-      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-      hibernate.hbm2ddl.extra_physical_table_types: PARTITIONED TABLE
+      hibernate:
+        cache:
+          region:
+            factory_class: jcache
+          use_query_cache: true
+          use_second_level_cache: true
+          use_structured_entries: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        generate_statistics: true
+        hbm2ddl:
+          extra_physical_table_types: PARTITIONED TABLE
+        javax:
+          cache:
+            missing_cache_strategy: create
+            provider: org.ehcache.jsr107.EhcacheCachingProvider
+            provider_configuration_file_resource_path: ehcache.xml
     show-sql: true
   main:
     lazy-initialization: true

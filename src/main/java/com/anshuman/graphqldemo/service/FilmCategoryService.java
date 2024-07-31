@@ -5,6 +5,7 @@ import com.anshuman.graphqldemo.model.mapper.FilmCategoryMapper;
 import com.anshuman.graphqldemo.model.repository.FilmCategoryRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmCategoryRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public class FilmCategoryService {
     private final FilmCategoryRepository filmCategoryRepository;
     private final FilmCategoryMapper filmCategoryMapper;
 
+
+    @Cacheable(value = "filmCategory", key = "#filmId")
     public Set<FilmCategoryRecord> getFilmCategoryByFilmId(Integer filmId) {
         return filmCategoryMapper.toDtoSet(filmCategoryRepository.getFilmCategoriesByFilmId(filmId));
     }

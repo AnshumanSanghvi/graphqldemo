@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -18,6 +19,8 @@ import java.util.Objects;
 @Table(name = "film_actor", schema = "public", indexes = {
         @Index(name = "idx_fk_film_id", columnList = "film_id")
 })
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class FilmActor {
     @EmbeddedId
     private FilmActorId id;

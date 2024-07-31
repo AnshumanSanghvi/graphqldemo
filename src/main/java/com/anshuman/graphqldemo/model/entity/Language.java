@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.time.Instant;
 import java.util.LinkedHashSet;
@@ -20,6 +21,8 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "language", schema = "public")
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Language {
     @Id
     @Column(name = "language_id", nullable = false)

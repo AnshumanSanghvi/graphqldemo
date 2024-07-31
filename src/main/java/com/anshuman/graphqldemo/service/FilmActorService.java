@@ -5,6 +5,7 @@ import com.anshuman.graphqldemo.model.mapper.FilmActorMapper;
 import com.anshuman.graphqldemo.model.repository.FilmActorRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmActorRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,8 @@ public class FilmActorService {
     private final FilmActorRepository filmActorRepository;
     private final FilmActorMapper filmActorMapper;
 
+
+    @Cacheable(value = "filmActors", key = "#filmId")
     public Set<FilmActorRecord> getFilmActorByFilmId(Integer filmId) {
         return filmActorMapper.toDtoSet(filmActorRepository.getActorsByFilmId(filmId));
     }
