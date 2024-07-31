@@ -29,12 +29,12 @@ public class FilmGQController {
 
     @QueryMapping
     public List<FilmRecord> getFilmsByTitle(@Argument String title) {
-        return filmService.getFilmsByTitle(title);
+        return filmService.getFilmRecordsByTitle(title);
     }
 
     @SchemaMapping(typeName = "Film", value = "language")
     public LanguageRecord language(FilmRecord filmRecord) {
-        return languageService.getLanguageById(filmRecord.language().id());
+        return languageService.getLanguageRecordById(filmRecord.language());
     }
 
     @SchemaMapping(typeName = "Film", value = "filmCategories")
@@ -49,7 +49,7 @@ public class FilmGQController {
 
     @SchemaMapping(typeName = "FilmCategory", value = "category")
     public CategoryRecord category(FilmCategoryRecord filmCategory) {
-        return categoryService.getCategoryById(Integer.valueOf(filmCategory.id().categoryId()));
+        return categoryService.getCategoryRecordById(Integer.valueOf(filmCategory.id().categoryId()));
     }
 
     @SchemaMapping(typeName = "Film", value = "filmActors")

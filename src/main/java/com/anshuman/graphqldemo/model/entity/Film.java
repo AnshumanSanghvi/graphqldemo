@@ -16,8 +16,6 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static java.util.stream.Collectors.joining;
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,11 +30,12 @@ import static java.util.stream.Collectors.joining;
 })
 public class Film {
 
-    public Film(Integer id, String title, Integer releaseYear, Short length) {
+    public Film(Integer id, String title, Integer releaseYear, Short length, Integer language) {
         this.id = id;
         this.title = title;
         this.releaseYear = releaseYear;
         this.length = length;
+        this.language = language;
     }
 
     @Id
@@ -55,10 +54,11 @@ public class Film {
     private Integer releaseYear;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "language_id", nullable = false)
-    @ToString.Exclude
-    private Language language;
+    //@ManyToOne(fetch = FetchType.LAZY, optional = true)
+    //@JoinColumn(name = "language_id", nullable = false)
+    //@ToString.Exclude
+    @Column(name = "language_id")
+    private Integer language;
 
     @NotNull
     @Column(name = "rental_duration", nullable = false)
@@ -86,15 +86,15 @@ public class Film {
     @ToString.Exclude
     private String fulltext;
 
-    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @Builder.Default
-    private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    @Builder.Default
+//    private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @Builder.Default
-    private Set<FilmActor> filmActors = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    @Builder.Default
+//    private Set<FilmActor> filmActors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     @ToString.Exclude
@@ -114,15 +114,16 @@ public class Film {
                 .append(" ").append("id: ").append(f.getId())
                 .append(", ").append("title: ").append(f.getTitle())
                 .append(", ").append("year: ").append(f.getReleaseYear())
-                .append(", ").append("language: ").append(f.getLanguage().getName().trim())
+                .append(", ").append("language: ").append(f.getLanguage())
                 .append(", ").append("length: ").append(f.getLength()).append(" mins")
                 .append(", ").append("rating: ").append(f.getRating().getValue())
                 .append(", ").append("description: ").append(f.getDescription())
-                .append(", ").append("categories: {").append(f.getFilmCategories().stream().map(FilmCategory::getId)
-                        .map(FilmCategoryId::getCategoryId).map(String::valueOf).collect(joining(", "))).append("}")
-                .append(", ").append("actors: {").append(f.getFilmActors().stream().map(FilmActor::getActor).map(a ->
-                        a.getFirstName() + " " + a.getLastName()).collect(joining(", "))).append("}")
-                .append("}");
+//                .append(", ").append("categories: {").append(f.getFilmCategories().stream().map(FilmCategory::getId)
+//                        .map(FilmCategoryId::getCategoryId).map(String::valueOf).collect(joining(", "))).append("}")
+//                .append(", ").append("actors: {").append(f.getFilmActors().stream().map(FilmActor::getActor).map(a ->
+//                        a.getFirstName() + " " + a.getLastName()).collect(joining(", "))).append("}")
+//                .append("}")
+        ;
 
         return filmSB.toString();
     }

@@ -16,4 +16,9 @@ public interface FilmCategoryRepository extends ListCrudRepository<FilmCategory,
             " INNER JOIN FETCH FC.id I" +
             " WHERE I.filmId = :filmId")
     Set<FilmCategory> getFilmCategoriesByFilmId(Integer filmId);
+
+    @Query(value = " SELECT FC " +
+            " FROM FilmCategory FC " +
+            " WHERE FC.id.filmId IN (:filmIds)")
+    Set<FilmCategory> getFilmCategoriesByFilmIds(Set<Integer> filmIds);
 }

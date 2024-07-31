@@ -20,11 +20,12 @@ public class FilmCategory {
     @EmbeddedId
     private FilmCategoryId id;
 
-    @MapsId("filmId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "film_id", nullable = false)
-    @ToString.Exclude
-    private Film film;
+//    @MapsId("filmId")
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "film_id", nullable = false)
+//    @ToString.Exclude
+//    @Column(name = "film_id")
+//    private Integer film;
 
     @NotNull
     @Column(name = "last_update", nullable = false)

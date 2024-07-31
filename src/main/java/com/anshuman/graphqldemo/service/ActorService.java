@@ -1,5 +1,6 @@
 package com.anshuman.graphqldemo.service;
 
+import com.anshuman.graphqldemo.model.entity.Actor;
 import com.anshuman.graphqldemo.model.entity.view.ActorInfo;
 import com.anshuman.graphqldemo.model.mapper.ActorInfoMapper;
 import com.anshuman.graphqldemo.model.mapper.ActorMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +40,9 @@ public class ActorService {
         return actorRepository.findById(actorId)
                 .map(actorMapper::toDto)
                 .orElse(null);
+    }
+
+    public Set<Actor> getActorsByActorId(Set<Short> actorIds) {
+        return actorRepository.findDistinctByIdIn(actorIds);
     }
 }

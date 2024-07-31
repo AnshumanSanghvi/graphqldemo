@@ -9,9 +9,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -43,10 +41,10 @@ public class Actor {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    @Builder.Default
-    private Set<FilmActor> filmActors = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    @Builder.Default
+//    private Set<FilmActor> filmActors = new LinkedHashSet<>();
 
     @Override
     public boolean equals(final Object o) {

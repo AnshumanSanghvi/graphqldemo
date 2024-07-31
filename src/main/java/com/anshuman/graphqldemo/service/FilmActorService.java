@@ -1,5 +1,6 @@
 package com.anshuman.graphqldemo.service;
 
+import com.anshuman.graphqldemo.model.entity.FilmActor;
 import com.anshuman.graphqldemo.model.mapper.FilmActorMapper;
 import com.anshuman.graphqldemo.model.repository.FilmActorRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmActorRecord;
@@ -18,5 +19,9 @@ public class FilmActorService {
 
     public Set<FilmActorRecord> getFilmActorByFilmId(Integer filmId) {
         return filmActorMapper.toDtoSet(filmActorRepository.getActorsByFilmId(filmId));
+    }
+
+    public Set<FilmActor> getFilmActorsByFilmIds(Set<Integer> filmIds) {
+        return filmActorRepository.getFilmActorsById(filmIds);
     }
 }

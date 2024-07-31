@@ -9,6 +9,7 @@ import org.hibernate.Hibernate;
 import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Builder
@@ -39,7 +40,7 @@ public class Language {
     private Set<Film> films = new LinkedHashSet<>();
 
     public String getName() {
-        return this.name.trim();
+        return Optional.ofNullable(this.name).map(String::trim).orElse("");
     }
 
     @Override

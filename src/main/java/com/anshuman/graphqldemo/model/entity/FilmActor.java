@@ -22,11 +22,11 @@ public class FilmActor {
     @EmbeddedId
     private FilmActorId id;
 
-    @MapsId("actorId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "actor_id", nullable = false)
-    @ToString.Exclude
-    private Actor actor;
+//    @MapsId("actorId")
+//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+//    @JoinColumn(name = "actor_id", nullable = false)
+//    @ToString.Exclude
+//    private Actor actor;
 
     @MapsId("filmId")
     @ManyToOne(fetch = FetchType.LAZY, optional = true)

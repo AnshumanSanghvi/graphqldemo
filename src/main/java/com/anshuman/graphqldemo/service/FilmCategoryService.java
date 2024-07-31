@@ -1,5 +1,6 @@
 package com.anshuman.graphqldemo.service;
 
+import com.anshuman.graphqldemo.model.entity.FilmCategory;
 import com.anshuman.graphqldemo.model.mapper.FilmCategoryMapper;
 import com.anshuman.graphqldemo.model.repository.FilmCategoryRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmCategoryRecord;
@@ -19,4 +20,8 @@ public class FilmCategoryService {
     public Set<FilmCategoryRecord> getFilmCategoryByFilmId(Integer filmId) {
         return filmCategoryMapper.toDtoSet(filmCategoryRepository.getFilmCategoriesByFilmId(filmId));
     }
-}
+
+    public Set<FilmCategory> getCategoriesByFilmIds(Set<Integer> filmIds) {
+        return filmCategoryRepository.getFilmCategoriesByFilmIds(filmIds);
+    }
+ }

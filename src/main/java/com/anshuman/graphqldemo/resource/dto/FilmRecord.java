@@ -17,7 +17,7 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public record FilmRecord(Integer id, @NotNull @Size(max = 255) String title, String description, Integer releaseYear,
-                         LanguageRecord language, @NotNull Short rentalDuration, @NotNull BigDecimal rentalRate,
+                         Integer language, @NotNull Short rentalDuration, @NotNull BigDecimal rentalRate,
                          Short length,
                          @NotNull BigDecimal replacementCost, @NotNull Instant lastUpdate, @NotNull String fulltext,
                          Set<FilmCategoryRecord> filmCategories, Set<FilmActorRecord> filmActors,

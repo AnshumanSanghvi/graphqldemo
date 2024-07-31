@@ -1,11 +1,14 @@
 package com.anshuman.graphqldemo.service;
 
+import com.anshuman.graphqldemo.model.entity.Language;
 import com.anshuman.graphqldemo.model.mapper.LanguageMapper;
 import com.anshuman.graphqldemo.model.repository.LanguageRepository;
 import com.anshuman.graphqldemo.resource.dto.LanguageRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 @Service
 @Transactional(readOnly = true, transactionManager = "JpaTransactionManager")
@@ -18,9 +21,13 @@ public class LanguageService {
         return languageMapper.toDto(languageRepository.getLanguageByFilmId(filmId));
     }
 
-    public LanguageRecord getLanguageById(Integer languageId) {
+    public LanguageRecord getLanguageRecordById(Integer languageId) {
         return languageRepository.findById(languageId)
                 .map(languageMapper::toDto)
                 .orElse(null);
+    }
+
+    public Set<Language> getLanguagesByIds(Set<Integer> languageIds) {
+        return languageRepository.getLanguagesByIds(languageIds);
     }
 }

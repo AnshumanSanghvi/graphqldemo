@@ -6,6 +6,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
+import java.util.Set;
 
 @RepositoryRestResource
 public interface FilmRepository extends ListCrudRepository<Film, Integer> {
@@ -13,16 +14,16 @@ public interface FilmRepository extends ListCrudRepository<Film, Integer> {
     @Query(value =
             " SELECT F " +
                     " FROM Film F " +
-                    " INNER JOIN FETCH F.filmActors FA " +
-                    " INNER JOIN FETCH FA.actor A " +
-                    " INNER JOIN FETCH F.filmCategories FC " +
-                    " INNER JOIN FETCH FC.category C " +
+                    //" INNER JOIN FETCH F.filmActors FA " +
+                    //" INNER JOIN FETCH FA.actor A " +
+                    //" INNER JOIN FETCH F.filmCategories FC " +
+                    //" INNER JOIN FETCH FC.category C " +
                     " INNER JOIN FETCH F.language L " +
                     " WHERE F.title LIKE %:title%")
     List<Film> customGetFilmDetailed(String title);
 
-    @Query(value = " SELECT NEW com.anshuman.graphqldemo.model.entity.Film( F.id, F.title, F.releaseYear, F.length ) " +
+    @Query(value = " SELECT NEW com.anshuman.graphqldemo.model.entity.Film( F.id, F.title, F.releaseYear, F.length, F.language ) " +
             " FROM Film F " +
             " WHERE F.title like %:title% ")
-    List<Film> getFilmByTitle(String title);
+    Set<Film> getFilmsByTitle(String title);
 }
