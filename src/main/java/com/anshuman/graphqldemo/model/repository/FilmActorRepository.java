@@ -5,8 +5,10 @@ import com.anshuman.graphqldemo.model.entity.FilmActorId;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.scheduling.annotation.Async;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @RepositoryRestResource
 public interface FilmActorRepository extends ListCrudRepository<FilmActor, FilmActorId> {
@@ -17,8 +19,9 @@ public interface FilmActorRepository extends ListCrudRepository<FilmActor, FilmA
             " WHERE I.filmId = :filmId")
     Set<FilmActor> getActorsByFilmId(Integer filmId);
 
+    @Async("APIThreadExecutor")
     @Query(value = " SELECT FA " +
             " FROM FilmActor FA " +
             " WHERE FA.id.filmId IN (:filmIds) ")
-    Set<FilmActor> getFilmActorsById(Set<Integer> filmIds);
+    CompletableFuture<Set<FilmActor>> getFilmActorsById(Set<Integer> filmIds);
 }

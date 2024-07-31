@@ -5,10 +5,12 @@ import com.anshuman.graphqldemo.model.mapper.FilmActorMapper;
 import com.anshuman.graphqldemo.model.repository.FilmActorRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmActorRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +23,8 @@ public class FilmActorService {
         return filmActorMapper.toDtoSet(filmActorRepository.getActorsByFilmId(filmId));
     }
 
-    public Set<FilmActor> getFilmActorsByFilmIds(Set<Integer> filmIds) {
+    @Async("APIThreadExecutor")
+    public CompletableFuture<Set<FilmActor>> getFilmActorsByFilmIds(Set<Integer> filmIds) {
         return filmActorRepository.getFilmActorsById(filmIds);
     }
 }

@@ -5,10 +5,12 @@ import com.anshuman.graphqldemo.model.mapper.FilmCategoryMapper;
 import com.anshuman.graphqldemo.model.repository.FilmCategoryRepository;
 import com.anshuman.graphqldemo.resource.dto.FilmCategoryRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional(readOnly = true, transactionManager = "JpaTransactionManager")
@@ -21,7 +23,8 @@ public class FilmCategoryService {
         return filmCategoryMapper.toDtoSet(filmCategoryRepository.getFilmCategoriesByFilmId(filmId));
     }
 
-    public Set<FilmCategory> getCategoriesByFilmIds(Set<Integer> filmIds) {
+    @Async("APIThreadExecutor")
+    public CompletableFuture<Set<FilmCategory>> getCategoriesByFilmIds(Set<Integer> filmIds) {
         return filmCategoryRepository.getFilmCategoriesByFilmIds(filmIds);
     }
  }

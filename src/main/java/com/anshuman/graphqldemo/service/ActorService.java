@@ -11,11 +11,13 @@ import com.anshuman.graphqldemo.resource.dto.ActorRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +44,8 @@ public class ActorService {
                 .orElse(null);
     }
 
-    public Set<Actor> getActorsByActorId(Set<Short> actorIds) {
-        return actorRepository.findDistinctByIdIn(actorIds);
+    @Async("APIThreadExecutor")
+    public CompletableFuture<Set<Actor>> getActorsByActorId(Set<Short> actorIds) {
+        return actorRepository.findDistinctActorByIdIn(actorIds);
     }
 }

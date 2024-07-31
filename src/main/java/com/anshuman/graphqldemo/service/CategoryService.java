@@ -5,10 +5,12 @@ import com.anshuman.graphqldemo.model.mapper.CategoryMapper;
 import com.anshuman.graphqldemo.model.repository.CategoryRepository;
 import com.anshuman.graphqldemo.resource.dto.CategoryRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional(readOnly = true, transactionManager = "JpaTransactionManager")
@@ -24,8 +26,9 @@ public class CategoryService {
                 .orElse(null);
     }
 
-    public Set<Category> getCategoriesByIds(Set<Short> ids) {
-        return categoryRepository.findDistinctByIdIn(ids);
+    @Async("APIThreadExecutor")
+    public CompletableFuture<Set<Category>> getCategoriesByIds(Set<Short> ids) {
+        return categoryRepository.findDistinctCategoryByIdIn(ids);
     }
 
 }

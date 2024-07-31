@@ -34,7 +34,7 @@ public class FilmGQControllerBatched {
     @BatchMapping(typeName = "Film2", value = "language")
     public Mono<Map<Film, Language>> language(Set<Film> films) {
         var languageIds = films.stream().map(Film::getLanguage).collect(Collectors.toSet());
-        return Mono.just(languageService.getLanguagesByIds(languageIds))
+        return Mono.fromFuture(languageService.getLanguagesByIds(languageIds))
                 .map(langs -> films.stream()
                         .collect(toMap(film -> film,
                                 film -> langs.stream()
@@ -47,7 +47,7 @@ public class FilmGQControllerBatched {
     @BatchMapping(typeName = "Film2", value = "filmCategories")
     public Mono<Map<Film, Set<FilmCategory>>> filmCategories(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
-        return Mono.just(filmCategoryService.getCategoriesByFilmIds(filmIds))
+        return Mono.fromFuture(filmCategoryService.getCategoriesByFilmIds(filmIds))
                 .map(fcats -> films.stream()
                         .collect(toMap(film -> film,
                         film -> fcats.stream()
@@ -63,7 +63,7 @@ public class FilmGQControllerBatched {
     @BatchMapping(typeName = "FilmCategory2", value = "category")
     public Mono<Map<FilmCategory, Category>> category(Set<FilmCategory> filmCategories) {
         Set<Short> categoryIds = filmCategories.stream().map(FilmCategory::getId).map(FilmCategoryId::getCategoryId).collect(Collectors.toSet());
-        return Mono.just(categoryService.getCategoriesByIds(categoryIds))
+        return Mono.fromFuture(categoryService.getCategoriesByIds(categoryIds))
                 .map(cats -> filmCategories.stream()
                         .collect(toMap(fc -> fc,
                                 fc -> cats.stream()
@@ -75,13 +75,14 @@ public class FilmGQControllerBatched {
     @BatchMapping(typeName = "Film2", value = "filmActors")
     public Mono<Map<Film, Set<FilmActor>>> filmActors(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
-        var filmActors =  filmActorService.getFilmActorsByFilmIds(filmIds);
-        return Mono.just(films.stream()
+        return Mono.fromFuture(filmActorService.getFilmActorsByFilmIds(filmIds))
+                .map(fas -> films.stream()
                 .collect(toMap(film -> film,
-                        film -> filmActors.stream()
+                        film -> fas.stream()
                                 .filter(fa -> Integer.valueOf(fa.getFilmId().intValue()).equals(film.getId()))
                                 .collect(Collectors.toSet()))));
     }
+
 
     @BatchMapping(typeName = "FilmActor2", value = "id")
     public Mono<Map<FilmActor, FilmActorId>> filmActorId(Set<FilmActor> filmActors) {
@@ -91,10 +92,10 @@ public class FilmGQControllerBatched {
     @BatchMapping(typeName = "FilmActor2", value = "actor")
     public Mono<Map<FilmActor, Actor>> actor(Set<FilmActor> filmActors) {
         var actorIds = filmActors.stream().map(FilmActor::getId).map(FilmActorId::getActorId).collect(Collectors.toSet());
-        var actors =  actorService.getActorsByActorId(actorIds);
-        return Mono.just(filmActors.stream()
+        return Mono.fromFuture(actorService.getActorsByActorId(actorIds))
+                .map(acts -> filmActors.stream()
                 .collect(toMap(fa -> fa,
-                        fa -> actors.stream()
+                        fa -> acts.stream()
                                 .filter(actor -> actor.getId().equals(fa.getId().getActorId().intValue()))
                                 .findFirst()
                                 .orElse(new Actor()))));

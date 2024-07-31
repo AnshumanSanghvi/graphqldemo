@@ -5,10 +5,12 @@ import com.anshuman.graphqldemo.model.mapper.LanguageMapper;
 import com.anshuman.graphqldemo.model.repository.LanguageRepository;
 import com.anshuman.graphqldemo.resource.dto.LanguageRecord;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional(readOnly = true, transactionManager = "JpaTransactionManager")
@@ -27,7 +29,8 @@ public class LanguageService {
                 .orElse(null);
     }
 
-    public Set<Language> getLanguagesByIds(Set<Integer> languageIds) {
+    @Async("APIThreadExecutor")
+    public CompletableFuture<Set<Language>> getLanguagesByIds(Set<Integer> languageIds) {
         return languageRepository.getLanguagesByIds(languageIds);
     }
 }
