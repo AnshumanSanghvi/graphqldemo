@@ -12,6 +12,6 @@ public class QueryCache {
 
     @Bean
     public PersistedQueryCache persistedQueryCache() {
-        return new InMemoryPersistedQueryCache(new HashMap<Object, String>(100));
+        return new InMemoryPersistedQueryCache(new HashMap<>(100));
     }
 }

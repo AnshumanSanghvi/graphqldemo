@@ -35,9 +35,9 @@ public class FilmGQControllerBatched {
     public Mono<Map<Film, Language>> language(Set<Film> films) {
         var languageIds = films.stream().map(Film::getLanguage).collect(Collectors.toSet());
         return Mono.fromFuture(languageService.getLanguagesByIds(languageIds))
-                .map(langs -> films.stream()
+                .map(languages -> films.stream()
                         .collect(toMap(film -> film,
-                                film -> langs.stream()
+                                film -> languages.stream()
                                         .filter(language -> language.getId().equals(film.getLanguage()))
                                         .findFirst()
                                         .orElse(new Language()))));
@@ -48,10 +48,10 @@ public class FilmGQControllerBatched {
     public Mono<Map<Film, Set<FilmCategory>>> filmCategories(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
         return Mono.fromFuture(filmCategoryService.getCategoriesByFilmIds(filmIds))
-                .map(fcats -> films.stream()
+                .map(filmCategories -> films.stream()
                         .collect(toMap(film -> film,
-                        film -> fcats.stream()
-                                .filter(fcat -> Integer.valueOf(fcat.getId().getFilmId().intValue()).equals(film.getId()))
+                        film -> filmCategories.stream()
+                                .filter(filmCategory -> Integer.valueOf(filmCategory.getId().getFilmId().intValue()).equals(film.getId()))
                                 .collect(Collectors.toSet()))));
     }
 
@@ -64,10 +64,10 @@ public class FilmGQControllerBatched {
     public Mono<Map<FilmCategory, Category>> category(Set<FilmCategory> filmCategories) {
         Set<Short> categoryIds = filmCategories.stream().map(FilmCategory::getId).map(FilmCategoryId::getCategoryId).collect(Collectors.toSet());
         return Mono.fromFuture(categoryService.getCategoriesByIds(categoryIds))
-                .map(cats -> filmCategories.stream()
+                .map(categories -> filmCategories.stream()
                         .collect(toMap(fc -> fc,
-                                fc -> cats.stream()
-                                        .filter(cat -> cat.getId().equals(fc.getId().getCategoryId().intValue()))
+                                fc -> categories.stream()
+                                        .filter(category -> category.getId().equals(fc.getId().getCategoryId().intValue()))
                                         .findFirst()
                                         .orElse(new Category()))));
     }
@@ -76,10 +76,10 @@ public class FilmGQControllerBatched {
     public Mono<Map<Film, Set<FilmActor>>> filmActors(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
         return Mono.fromFuture(filmActorService.getFilmActorsByFilmIds(filmIds))
-                .map(fas -> films.stream()
+                .map(filmActors -> films.stream()
                 .collect(toMap(film -> film,
-                        film -> fas.stream()
-                                .filter(fa -> Integer.valueOf(fa.getFilmId().intValue()).equals(film.getId()))
+                        film -> filmActors.stream()
+                                .filter(filmActor -> Integer.valueOf(filmActor.getFilmId().intValue()).equals(film.getId()))
                                 .collect(Collectors.toSet()))));
     }
 
@@ -93,9 +93,9 @@ public class FilmGQControllerBatched {
     public Mono<Map<FilmActor, Actor>> actor(Set<FilmActor> filmActors) {
         var actorIds = filmActors.stream().map(FilmActor::getId).map(FilmActorId::getActorId).collect(Collectors.toSet());
         return Mono.fromFuture(actorService.getActorsByActorId(actorIds))
-                .map(acts -> filmActors.stream()
-                .collect(toMap(fa -> fa,
-                        fa -> acts.stream()
+                .map(actors -> filmActors.stream()
+                .collect(toMap(filmActor -> filmActor,
+                        fa -> actors.stream()
                                 .filter(actor -> actor.getId().equals(fa.getId().getActorId().intValue()))
                                 .findFirst()
                                 .orElse(new Actor()))));

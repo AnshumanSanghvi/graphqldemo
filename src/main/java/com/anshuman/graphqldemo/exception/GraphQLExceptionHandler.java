@@ -22,7 +22,7 @@ public class GraphQLExceptionHandler extends DataFetcherExceptionResolverAdapter
     @GraphQlExceptionHandler
     @Override
     protected GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
-        GraphQLError graphQLError = null;
+        GraphQLError graphQLError;
         Objects.requireNonNull(ex);
         Objects.requireNonNull(env);
         graphQLError = GraphqlErrorBuilder.newError()

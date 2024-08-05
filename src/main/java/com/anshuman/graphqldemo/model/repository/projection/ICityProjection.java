@@ -7,7 +7,7 @@ public interface ICityProjection {
 
     Integer getCountryId();
 
-    public static CityProjection toPojo(ICityProjection projection) {
+    static CityProjection toPojo(ICityProjection projection) {
         return new CityProjection(projection.getId(), projection.getCity(), projection.getCountryId());
     }
 }
