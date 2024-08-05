@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressProjection implements IAddressProjection {
     private Integer id;
-    private String address;
-    private String address2;
+    private String addressLine;
+    private String addressLine2;
     private String district;
     private Integer cityId;
     private String postalCode;

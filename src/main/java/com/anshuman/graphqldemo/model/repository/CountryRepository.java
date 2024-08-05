@@ -1,8 +1,8 @@
 package com.anshuman.graphqldemo.model.repository;
 
 import com.anshuman.graphqldemo.model.entity.Country;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.QueryHint;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.ListCrudRepository;
@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public interface CountryRepository extends ListCrudRepository<Country, Integer> {
 
     @Override
-    void deleteById(@NotNull Integer countryId);
+    void deleteById(@Nonnull Integer countryId);
 
     @Async("APIThreadExecutor")
     @Query(" SELECT c " +

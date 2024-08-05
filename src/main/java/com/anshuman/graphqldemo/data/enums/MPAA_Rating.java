@@ -2,11 +2,11 @@ package com.anshuman.graphqldemo.data.enums;
 
 import lombok.Getter;
 
+@Getter
 public enum MPAA_Rating {
     G("G"), NC_17("NC-17"), PG("PG"), PG_13("PG-13"), R("R");
 
     static final MPAA_Rating[] allValues = MPAA_Rating.values();
-    @Getter
     final String value;
 
     MPAA_Rating(String value) {

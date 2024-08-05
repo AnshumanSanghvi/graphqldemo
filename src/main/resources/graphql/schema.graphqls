@@ -117,23 +117,23 @@ type Store {
 
 type Address {
     id: Int!
-    address: String!
-    address2: String
+    addressLine: String
+    addressLine2: String
     district: String
-    city: City!
+    city: City
     postalCode: String
     phone: String
 }
 
 type City {
     id: Int!
-    city: String!
+    name: String!
     country: Country!
 }
 
 type Country {
     id: Int!
-    country: String!
+    name: String!
 }
 
 type StoreStaff {

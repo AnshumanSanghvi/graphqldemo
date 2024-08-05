@@ -14,6 +14,6 @@ import java.time.Instant;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
 public record RottenTomatoesRatingRecord(Integer id, @NotNull @Size(max = 25) String rottenTomatoesId,
-        @NotNull Float rottenTomatoesRating, @NotNull Integer filmId,
-        @NotNull Instant lastUpdate) implements Serializable {
+                                         @NotNull Float rating, @NotNull Integer filmId,
+                                         @NotNull Instant lastUpdate) implements Serializable {
 }

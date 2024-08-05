@@ -13,6 +13,6 @@ import java.time.Instant;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public record CountryRecord(Integer id, @NotNull @Size(max = 50) String country,
+public record CountryRecord(Integer id, @NotNull @Size(max = 50) String name,
         @NotNull Instant lastUpdate) implements Serializable {
 }

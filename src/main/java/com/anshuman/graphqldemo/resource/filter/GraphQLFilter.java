@@ -1,6 +1,7 @@
 package com.anshuman.graphqldemo.resource.filter;
 
 import graphql.execution.preparsed.persisted.InMemoryPersistedQueryCache;
+import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +21,9 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
 
     private final InMemoryPersistedQueryCache persistedQueryCache;
 
+    @Nonnull
     @Override
-    public @NotNull Mono<WebGraphQlResponse> intercept(final WebGraphQlRequest request, final Chain chain) {
+    public @NotNull Mono<WebGraphQlResponse> intercept(@Nonnull final WebGraphQlRequest request, final Chain chain) {
 
         checkCacheHit(request);
         logRequest(request);
@@ -67,13 +69,15 @@ public class GraphQLFilter implements WebGraphQlInterceptor {
         log.trace("Response executionResult: {}", response.getExecutionResult());
     }
 
+    @Nonnull
     @Override
-    public @NotNull WebGraphQlInterceptor andThen(final @NotNull WebGraphQlInterceptor nextInterceptor) {
+    public @NotNull WebGraphQlInterceptor andThen(final @Nonnull WebGraphQlInterceptor nextInterceptor) {
         return WebGraphQlInterceptor.super.andThen(nextInterceptor);
     }
 
+    @Nonnull
     @Override
-    public @NotNull Chain apply(final @NotNull Chain chain) {
+    public @NotNull Chain apply(final @Nonnull Chain chain) {
         return WebGraphQlInterceptor.super.apply(chain);
     }
 }

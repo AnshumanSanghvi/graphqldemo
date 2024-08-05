@@ -17,7 +17,8 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "rental", schema = "public", indexes = {
-        @Index(name = "idx_unq_rental_rental_date_inventory_id_customer_id", columnList = "rental_date, inventory_id, customer_id", unique = true),
+        @Index(name = "idx_unq_rental_rental_date_inventory_id_customer_id",
+                columnList = "rental_date, inventory_id, customer_id", unique = true),
         @Index(name = "idx_fk_inventory_id", columnList = "inventory_id")
 })
 @Cacheable
@@ -32,13 +33,13 @@ public class Rental {
     private Instant rentalDate;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id", nullable = false)
     @ToString.Exclude
     private Inventory inventory;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     @ToString.Exclude
     private Customer customer;
@@ -47,7 +48,7 @@ public class Rental {
     private Instant returnDate;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_id", nullable = false)
     @ToString.Exclude
     private Staff staff;

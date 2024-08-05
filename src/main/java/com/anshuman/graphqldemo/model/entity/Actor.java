@@ -1,7 +1,5 @@
 package com.anshuman.graphqldemo.model.entity;
 
-//import io.leangen.graphql.annotations.GraphQLArgument;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -43,11 +41,6 @@ public class Actor {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
-
-//    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    @Builder.Default
-//    private Set<FilmActor> filmActors = new LinkedHashSet<>();
 
     @Override
     public boolean equals(final Object o) {

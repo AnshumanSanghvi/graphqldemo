@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CityProjection implements ICityProjection {
     private Integer id;
-    private String city;
+    private String name;
     private Integer countryId;
 }
 

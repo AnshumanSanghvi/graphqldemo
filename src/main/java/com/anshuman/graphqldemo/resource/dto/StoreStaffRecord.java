@@ -25,10 +25,10 @@ public record StoreStaffRecord(Integer storeId,
                 .collect(groupingBy(StoreStaffProjection::getStoreId))
                 .forEach((storeId, storeProjList) -> {
                     List<String> staffNames = storeProjList.stream().map(StoreStaffProjection::getStaffName).toList();
-                    StoreStaffProjection storeStaffProjn = storeProjList.get(0);
-                    String district = storeStaffProjn.getDistrict();
-                    String city = storeStaffProjn.getCity();
-                    String country = storeStaffProjn.getCountry();
+                    StoreStaffProjection storeStaffProjection = storeProjList.getFirst();
+                    String district = storeStaffProjection.getDistrict();
+                    String city = storeStaffProjection.getCity();
+                    String country = storeStaffProjection.getCountry();
                     storeStaffRecords.add(new StoreStaffRecord(storeId, district, city, country, staffNames));
                 });
 

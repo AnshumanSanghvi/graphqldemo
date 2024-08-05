@@ -3,6 +3,7 @@ package com.anshuman.graphqldemo.exception;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.schema.DataFetchingEnvironment;
+import jakarta.annotation.Nonnull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.graphql.data.method.annotation.GraphQlExceptionHandler;
@@ -21,8 +22,8 @@ public class GraphQLExceptionHandler extends DataFetcherExceptionResolverAdapter
 
     @GraphQlExceptionHandler
     @Override
-    protected GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
-        GraphQLError graphQLError = null;
+    protected GraphQLError resolveToSingleError(@Nonnull Throwable ex, @Nonnull DataFetchingEnvironment env) {
+        GraphQLError graphQLError;
         Objects.requireNonNull(ex);
         Objects.requireNonNull(env);
         graphQLError = GraphqlErrorBuilder.newError()

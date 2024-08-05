@@ -28,12 +28,12 @@ public class StoreStaffProjection {
                 .orElse(null);
         this.city = Optional.ofNullable(address)
                 .flatMap(add -> Optional.ofNullable(add.getCity()))
-                .map(City::getCity)
+                .map(City::getName)
                 .orElse(null);
         this.country = Optional.ofNullable(address)
                 .flatMap(add -> Optional.ofNullable(add.getCity()))
-                .flatMap(city -> Optional.ofNullable(city.getCountry()))
-                .map(Country::getCountry)
+                .flatMap(addrCity -> Optional.ofNullable(addrCity.getCountry()))
+                .map(Country::getName)
                 .orElse(null);
         this.staffName = Optional.ofNullable(staff)
                 .map(st -> st.getFirstName() + " " + st.getLastName())

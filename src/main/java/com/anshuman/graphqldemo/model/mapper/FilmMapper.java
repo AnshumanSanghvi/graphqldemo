@@ -11,16 +11,6 @@ import java.util.List;
 public interface FilmMapper {
     Film toEntity(FilmRecord filmRecord);
 
-//    @AfterMapping
-//    default void linkFilmCategories(@MappingTarget Film film) {
-//        film.getFilmCategories().forEach(filmCategory -> filmCategory.setFilm(film));
-//    }
-
-//    @AfterMapping
-//    default void linkFilmActors(@MappingTarget Film film) {
-//        film.getFilmActors().forEach(filmActor -> filmActor.setFilm(film));
-//    }
-
     @AfterMapping
     default void linkInventories(@MappingTarget Film film) {
         film.getInventories().forEach(inventory -> inventory.setFilm(film));

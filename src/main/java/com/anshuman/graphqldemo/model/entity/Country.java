@@ -28,7 +28,7 @@ public class Country {
     @Size(max = 50)
     @NotNull
     @Column(name = "country", nullable = false, length = 50)
-    private String country;
+    private String name;
 
     @NotNull
     @Column(name = "last_update", nullable = false)
@@ -38,8 +38,8 @@ public class Country {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        final Country country = (Country) o;
-        return getId() != null && Objects.equals(getId(), country.getId());
+        final Country countryObject = (Country) o;
+        return getId() != null && Objects.equals(getId(), countryObject.getId());
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.time.Instant;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public record AddressRecord(Integer id, @NotNull @Size(max = 50) String address, @Size(max = 50) String address2,
-        @NotNull @Size(max = 20) String district, @NotNull CityRecord city, @Size(max = 10) String postalCode,
-        @NotNull @Size(max = 20) String phone, @NotNull Instant lastUpdate) implements Serializable {
+public record AddressRecord(Integer id, @NotNull @Size(max = 50) String addressLine, @Size(max = 50) String addressLine2,
+                            @NotNull @Size(max = 20) String district, @NotNull CityRecord city, @Size(max = 10) String postalCode,
+                            @NotNull @Size(max = 20) String phone, @NotNull Instant lastUpdate) implements Serializable {
 }

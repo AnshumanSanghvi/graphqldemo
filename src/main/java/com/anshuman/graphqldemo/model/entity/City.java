@@ -30,10 +30,10 @@ public class City {
     @Size(max = 50)
     @NotNull
     @Column(name = "city", nullable = false, length = 50)
-    private String city;
+    private String name;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
     @ToString.Exclude
     private Country country;
@@ -46,8 +46,8 @@ public class City {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        final City city = (City) o;
-        return getId() != null && Objects.equals(getId(), city.getId());
+        final City cityObject = (City) o;
+        return getId() != null && Objects.equals(getId(), cityObject.getId());
     }
 
     @Override

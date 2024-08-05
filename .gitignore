@@ -3,6 +3,9 @@
 ### Logs
 logs
 
+### Other
+jvm_checkpoint
+
 
 ### Maven ###
 pom.xml.tag

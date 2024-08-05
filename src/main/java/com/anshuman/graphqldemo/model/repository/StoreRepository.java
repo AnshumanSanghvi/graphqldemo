@@ -19,7 +19,7 @@ public interface StoreRepository extends ListCrudRepository<Store, Integer> {
             "   INNER JOIN FETCH ST.address ADD " +
             "   INNER JOIN FETCH ADD.city CT " +
             "   INNER JOIN FETCH CT.country CTY " +
-            " WHERE CTY.country LIKE %:country% ")
+            " WHERE CTY.name LIKE %:country% ")
     @QueryHints(value = { @QueryHint(name = "org.hibernate.cacheable", value = "true") })
     List<Store> customGetStoreWithLocation(String country);
 

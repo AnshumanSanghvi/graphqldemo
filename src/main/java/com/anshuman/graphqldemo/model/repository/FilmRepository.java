@@ -20,7 +20,8 @@ public interface FilmRepository extends ListCrudRepository<Film, Integer> {
     @QueryHints(value = { @QueryHint(name = "org.hibernate.cacheable", value = "true") })
     List<Film> customGetFilmDetailed(String title);
 
-    @Query(value = " SELECT NEW com.anshuman.graphqldemo.model.entity.Film( F.id, F.title, F.releaseYear, F.length, F.language ) " +
+    @Query(value = " SELECT " +
+            " NEW com.anshuman.graphqldemo.model.entity.Film( F.id, F.title, F.releaseYear, F.length, F.language ) " +
             " FROM Film F " +
             " WHERE F.title like %:title% ")
     @QueryHints(value = { @QueryHint(name = "org.hibernate.cacheable", value = "true") })
