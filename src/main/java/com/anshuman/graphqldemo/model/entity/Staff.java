@@ -36,7 +36,7 @@ public class Staff {
     private String lastName;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", nullable = false)
     @ToString.Exclude
     private Address address;

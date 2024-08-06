@@ -2,6 +2,7 @@ package com.anshuman.graphqldemo.model.entity.converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.EmbeddedId;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class EmbeddedIdConverter implements BackendIdConverter {
                 .findFirst();
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public Serializable fromRequestId(final String id, final Class<?> entityType) {
         return getFieldWithEmbeddedAnnotation(entityType)
@@ -65,7 +66,7 @@ public class EmbeddedIdConverter implements BackendIdConverter {
     }
 
     @Override
-    public boolean supports(final Class<?> aClass) {
+    public boolean supports(@Nonnull final Class<?> aClass) {
         return isEmbeddedIdAnnotationPresent(aClass);
     }
 }

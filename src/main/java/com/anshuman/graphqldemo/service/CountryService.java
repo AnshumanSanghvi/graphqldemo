@@ -72,7 +72,7 @@ public class CountryService {
         return countryRepository
                 .findById(countryId)
                 .map(country -> {
-                    country.setCountry(name);
+                    country.setName(name);
                     return country;
                 })
                 .map(countryRepository::save)

@@ -30,7 +30,7 @@ public class ImdbRating {
 
     @NotNull
     @Column(name = "imdb_rating", nullable = false)
-    private Float imdbRating;
+    private Float rating;
 
     @NotNull
     @Column(name = "film_id", nullable = false)

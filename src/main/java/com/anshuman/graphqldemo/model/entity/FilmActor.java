@@ -25,14 +25,8 @@ public class FilmActor {
     @EmbeddedId
     private FilmActorId id;
 
-//    @MapsId("actorId")
-//    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-//    @JoinColumn(name = "actor_id", nullable = false)
-//    @ToString.Exclude
-//    private Actor actor;
-
     @MapsId("filmId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "film_id", nullable = false)
     @ToString.Exclude
     private Film film;
@@ -46,8 +40,8 @@ public class FilmActor {
     }
 
     public void setFilmId(Short filmId) {
-        FilmActorId id = (this.getId()) == null ? new FilmActorId() : this.getId();
-        id.setFilmId(filmId);
+        FilmActorId filmActorId = (this.getId()) == null ? new FilmActorId() : this.getId();
+        filmActorId.setFilmId(filmId);
     }
 
     public Short getActorId() {
@@ -55,8 +49,8 @@ public class FilmActor {
     }
 
     public void setActorId(Short actorId) {
-        FilmActorId id = (this.getId()) == null ? new FilmActorId() : this.getId();
-        id.setActorId(actorId);
+        FilmActorId filmActorId = (this.getId()) == null ? new FilmActorId() : this.getId();
+        filmActorId.setActorId(actorId);
     }
 
     @Override

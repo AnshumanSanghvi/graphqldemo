@@ -30,11 +30,11 @@ public class Address {
     @Size(max = 50)
     @NotNull
     @Column(name = "address", nullable = false, length = 50)
-    private String address;
+    private String addressLine;
 
     @Size(max = 50)
     @Column(name = "address2", length = 50)
-    private String address2;
+    private String addressLine2;
 
     @Size(max = 20)
     @NotNull
@@ -42,7 +42,7 @@ public class Address {
     private String district;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id", nullable = false)
     @ToString.Exclude
     private City city;
@@ -64,8 +64,8 @@ public class Address {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        final Address address = (Address) o;
-        return getId() != null && Objects.equals(getId(), address.getId());
+        final Address addressObject = (Address) o;
+        return getId() != null && Objects.equals(getId(), addressObject.getId());
     }
 
     @Override
@@ -73,10 +73,10 @@ public class Address {
         return getClass().hashCode();
     }
 
-    public Address(final Integer id, @NotNull final String address, final String address2, @NotNull final String district, final String postalCode, @NotNull final String phone) {
+    public Address(final Integer id, @NotNull final String addressLine, final String addressLine2, @NotNull final String district, final String postalCode, @NotNull final String phone) {
         this.id = id;
-        this.address = address;
-        this.address2 = address2;
+        this.addressLine = addressLine;
+        this.addressLine2 = addressLine2;
         this.district = district;
         this.postalCode = postalCode;
         this.phone = phone;

@@ -6,9 +6,9 @@ public interface IAddressProjection {
 
     Integer getId();
 
-    String getAddress();
+    String getAddressLine();
 
-    String getAddress2();
+    String getAddressLine2();
 
     String getDistrict();
 
@@ -19,8 +19,8 @@ public interface IAddressProjection {
     String getPhone();
 
     static AddressProjection toPojo(IAddressProjection projection) {
-        return new AddressProjection(projection.getId(), projection.getAddress(),
-                projection.getAddress2(), projection.getDistrict(), projection.getCityId(),
+        return new AddressProjection(projection.getId(), projection.getAddressLine(),
+                projection.getAddressLine2(), projection.getDistrict(), projection.getCityId(),
                 projection.getPostalCode(), projection.getPhone());
     }
 

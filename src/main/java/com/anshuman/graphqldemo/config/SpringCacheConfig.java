@@ -1,5 +1,6 @@
 package com.anshuman.graphqldemo.config;
 
+import jakarta.annotation.Nonnull;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -7,7 +8,6 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.util.Pair;
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
@@ -29,13 +28,15 @@ public class SpringCacheConfig {
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager() {
+            @Nonnull
             @Override
-            protected Cache createConcurrentMapCache(String name) {
+            protected Cache createConcurrentMapCache(@Nonnull String name) {
                 return new ConcurrentMapCollectionHandlingDecoratedCache(super.createConcurrentMapCache(name));
             }
         };
     }
 
+    @SuppressWarnings("unchecked")
     protected static class ConcurrentMapCollectionHandlingDecoratedCache extends CollectionHandlingDecoratedCache {
 
         protected ConcurrentMapCollectionHandlingDecoratedCache(final Cache cache) {
@@ -45,7 +46,7 @@ public class SpringCacheConfig {
         @Override
         protected boolean areAllKeysPresentInCache(Iterable<?> keys) {
 
-            ConcurrentMap nativeCache = (ConcurrentMap) getNativeCache();
+            ConcurrentMap<Object, Object> nativeCache = (ConcurrentMap<Object, Object>) getNativeCache();
 
             return StreamSupport.stream(keys.spliterator(), false).allMatch(nativeCache::containsKey);
         }
@@ -66,11 +67,13 @@ public class SpringCacheConfig {
             return this.cache;
         }
 
+        @Nonnull
         @Override
         public String getName() {
             return getCache().getName();
         }
 
+        @Nonnull
         @Override
         public Object getNativeCache() {
             return getCache().getNativeCache();
@@ -80,11 +83,11 @@ public class SpringCacheConfig {
 
         @SuppressWarnings("unused")
         protected int sizeOf(Iterable<?> iterable) {
-            return Long.valueOf(StreamSupport.stream(iterable.spliterator(), false).count()).intValue();
+            return (int) StreamSupport.stream(iterable.spliterator(), false).count();
         }
 
         protected <T> List<T> toList(Iterable<T> iterable) {
-            return StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
+            return StreamSupport.stream(iterable.spliterator(), false).toList();
         }
 
         @Override
@@ -113,7 +116,7 @@ public class SpringCacheConfig {
 
         @Override
         @SuppressWarnings("unchecked")
-        public <T> T get(Object key, Class<T> type) {
+        public <T> T get(@Nonnull Object key, Class<T> type) {
 
             if (key instanceof Iterable) {
 
@@ -134,13 +137,12 @@ public class SpringCacheConfig {
         }
 
         @Override
-        public CompletableFuture<?> retrieve(Object key) {
+        public CompletableFuture<?> retrieve(@Nonnull Object key) {
             return CompletableFuture.completedFuture(get(key));
         }
 
         @Override
-        @SuppressWarnings("unchecked")
-        public void put(@NonNull Object key, Object value) {
+        public void put(@Nonnull Object key, Object value) {
 
             if (key instanceof Iterable) {
 
@@ -157,7 +159,7 @@ public class SpringCacheConfig {
         }
 
         @Override
-        public ValueWrapper putIfAbsent(Object key, Object value) {
+        public ValueWrapper putIfAbsent(@Nonnull Object key, Object value) {
 
             if (key instanceof Iterable) {
 
@@ -166,19 +168,17 @@ public class SpringCacheConfig {
                                 ObjectUtils.nullSafeClassName(value), key));
 
                 return () -> pairsFromKeysAndValues(toList((Iterable<?>) key), toList((Iterable<?>) value)).stream()
-                        .map(pair -> getCache().putIfAbsent(pair.getFirst(), pair.getSecond()))
-                        .collect(Collectors.toList());
+                        .map(pair -> getCache().putIfAbsent(pair.getFirst(), pair.getSecond())).toList();
             }
 
             return getCache().putIfAbsent(key, value);
         }
 
         @Override
-        @SuppressWarnings("unchecked")
-        public void evict(Object key) {
+        public void evict(@Nonnull Object key) {
 
-            if (key instanceof Iterable) {
-                StreamSupport.stream(((Iterable) key).spliterator(), false).forEach(getCache()::evict);
+            if (key instanceof Iterable<?> iterableKey) {
+                StreamSupport.stream(iterableKey.spliterator(), false).forEach(getCache()::evict);
             }
             else {
                 getCache().evict(key);
@@ -200,7 +200,7 @@ public class SpringCacheConfig {
 
             return IntStream.range(0, keysSize)
                     .mapToObj(index -> Pair.of(keys.get(index), values.get(index)))
-                    .collect(Collectors.toList());
+                    .toList();
 
         }
     }

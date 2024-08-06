@@ -89,16 +89,6 @@ public class Film {
     @ToString.Exclude
     private String fulltext;
 
-//    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    @Builder.Default
-//    private Set<FilmCategory> filmCategories = new LinkedHashSet<>();
-
-//    @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    @Builder.Default
-//    private Set<FilmActor> filmActors = new LinkedHashSet<>();
-
     @OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     @ToString.Exclude
     @Builder.Default
@@ -112,23 +102,14 @@ public class Film {
     private String specialFeatures;
 
     public static String getFilmDetailed(Film f) {
-        StringBuilder filmSB = new StringBuilder();
-        filmSB.append("{")
-                .append(" ").append("id: ").append(f.getId())
-                .append(", ").append("title: ").append(f.getTitle())
-                .append(", ").append("year: ").append(f.getReleaseYear())
-                .append(", ").append("language: ").append(f.getLanguage())
-                .append(", ").append("length: ").append(f.getLength()).append(" mins")
-                .append(", ").append("rating: ").append(f.getRating().getValue())
-                .append(", ").append("description: ").append(f.getDescription())
-//                .append(", ").append("categories: {").append(f.getFilmCategories().stream().map(FilmCategory::getId)
-//                        .map(FilmCategoryId::getCategoryId).map(String::valueOf).collect(joining(", "))).append("}")
-//                .append(", ").append("actors: {").append(f.getFilmActors().stream().map(FilmActor::getActor).map(a ->
-//                        a.getFirstName() + " " + a.getLastName()).collect(joining(", "))).append("}")
-//                .append("}")
-        ;
-
-        return filmSB.toString();
+        return "{" +
+                " " + "id: " + f.getId() +
+                ", " + "title: " + f.getTitle() +
+                ", " + "year: " + f.getReleaseYear() +
+                ", " + "language: " + f.getLanguage() +
+                ", " + "length: " + f.getLength() + " mins" +
+                ", " + "rating: " + f.getRating().getValue() +
+                ", " + "description: " + f.getDescription();
     }
 
     @Override

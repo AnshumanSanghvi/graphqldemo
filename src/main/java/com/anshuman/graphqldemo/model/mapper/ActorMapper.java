@@ -8,11 +8,6 @@ import org.mapstruct.*;
 public interface ActorMapper {
     Actor toEntity(ActorRecord actorRecord);
 
-//    @AfterMapping
-//    default void linkFilmActors(@MappingTarget Actor actor) {
-//        actor.getFilmActors().forEach(filmActor -> filmActor.setActor(actor));
-//    }
-
     ActorRecord toDto(Actor actor);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

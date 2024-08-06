@@ -25,10 +25,9 @@ public class ActorGQController {
     public List<ActorInfoRecord> getActorInfoByName(@Argument @PositiveOrZero Integer pageNumber,
             @Argument @PositiveOrZero Integer pageSize, @Argument @NotNull String name) {
 
-        Optional.ofNullable(request.getHeader("auth"))
+        return Optional.ofNullable(request.getHeader("auth"))
                 .filter(headerVal -> headerVal.equalsIgnoreCase("1234567"))
+                .map(x -> actorService.getActorInfoByName(pageNumber, pageSize, name))
                 .orElseThrow(() -> new IllegalAccessError("Missing valid authorization"));
-
-        return actorService.getActorInfoByName(pageNumber, pageSize, name);
     }
 }

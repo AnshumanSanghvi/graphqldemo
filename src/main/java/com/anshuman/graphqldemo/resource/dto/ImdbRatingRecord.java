@@ -13,6 +13,6 @@ import java.time.Instant;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Component
-public record ImdbRatingRecord(Integer id, @NotNull @Size(max = 25) String imdbId, @NotNull Float imdbRating,
+public record ImdbRatingRecord(Integer id, @NotNull @Size(max = 25) String imdbId, @NotNull Float rating,
         @NotNull Integer filmId, @NotNull Instant lastUpdate) implements Serializable {
 }

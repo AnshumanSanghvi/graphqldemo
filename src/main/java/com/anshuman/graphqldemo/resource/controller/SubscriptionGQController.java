@@ -1,6 +1,7 @@
 package com.anshuman.graphqldemo.resource.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,11 @@ import java.util.stream.Stream;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class SubscriptionGQController {
 
     private static final AtomicInteger number = new AtomicInteger(0);
-//    private final CountryReactiveService countryService;
+
 
     @SubscriptionMapping
     public Publisher<Integer> getNumber() {
@@ -28,13 +30,9 @@ public class SubscriptionGQController {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ex) {
-            throw new RuntimeException(ex);
+            log.error("thread interrupted", ex);
+            Thread.currentThread().interrupt();
         }
     }
-
-//    @SubscriptionMapping
-//    public Publisher<CountryRecord> getCountrySubscription() {
-//        return countryService.getCountries();
-//    }
 
 }
