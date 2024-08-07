@@ -32,12 +32,14 @@ public class LanguageGQController {
     public Mono<Map<Film, Language>> language(Set<Film> films) {
         var languageIds = films.stream().map(Film::getLanguage).collect(Collectors.toSet());
         return Mono.fromFuture(languageService.getLanguagesByIds(languageIds))
-                .map(languages -> films.stream()
-                        .collect(toMap(film -> film,
-                                film -> languages.stream()
-                                        .filter(language -> language.getId().equals(film.getLanguage()))
-                                        .findFirst()
-                                        .orElse(new Language()))));
+                .map(languages -> films.stream().collect(toMap(film -> film, film -> getMatchingLanguages(languages, film))));
 
+    }
+
+    private static Language getMatchingLanguages(Set<Language> languages, Film film) {
+        return languages.stream()
+                .filter(language -> language.getId().equals(film.getLanguage()))
+                .findFirst()
+                .orElse(new Language());
     }
 }

@@ -48,11 +48,13 @@ public class CategoryGQController {
     public Mono<Map<Film, Set<FilmCategory>>> filmCategories(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
         return Mono.fromFuture(filmCategoryService.getCategoriesByFilmIds(filmIds))
-                .map(filmCategories -> films.stream()
-                        .collect(toMap(film -> film,
-                                film -> filmCategories.stream()
-                                        .filter(filmCategory -> Integer.valueOf(filmCategory.getId().getFilmId().intValue()).equals(film.getId()))
-                                        .collect(Collectors.toSet()))));
+                .map(filmCategories -> films.stream().collect(toMap(film -> film, film -> getMatchingCategoriesByFilmId(filmCategories, film))));
+    }
+
+    private static Set<FilmCategory> getMatchingCategoriesByFilmId(Set<FilmCategory> filmCategories, Film film) {
+        return filmCategories.stream()
+                .filter(filmCategory -> Integer.valueOf(filmCategory.getId().getFilmId().intValue()).equals(film.getId()))
+                .collect(Collectors.toSet());
     }
 
     @BatchMapping(typeName = "FilmCategory2", value = "id")
@@ -64,11 +66,13 @@ public class CategoryGQController {
     public Mono<Map<FilmCategory, Category>> category(Set<FilmCategory> filmCategories) {
         Set<Short> categoryIds = filmCategories.stream().map(FilmCategory::getId).map(FilmCategoryId::getCategoryId).collect(Collectors.toSet());
         return Mono.fromFuture(categoryService.getCategoriesByIds(categoryIds))
-                .map(categories -> filmCategories.stream()
-                        .collect(toMap(fc -> fc,
-                                fc -> categories.stream()
-                                        .filter(category -> category.getId().equals(fc.getId().getCategoryId().intValue()))
-                                        .findFirst()
-                                        .orElse(new Category()))));
+                .map(categories -> filmCategories.stream().collect(toMap(fc -> fc, fc -> getMatchingCategoriesByCatId(categories, fc))));
+    }
+
+    private static Category getMatchingCategoriesByCatId(Set<Category> categories, FilmCategory fc) {
+        return categories.stream()
+                .filter(category -> category.getId().equals(fc.getId().getCategoryId().intValue()))
+                .findFirst()
+                .orElse(new Category());
     }
 }

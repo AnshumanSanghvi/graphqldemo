@@ -63,11 +63,13 @@ public class ActorGQController {
     public Mono<Map<Film, Set<FilmActor>>> filmActors(Set<Film> films) {
         Set<Integer> filmIds = films.stream().map(Film::getId).collect(Collectors.toSet());
         return Mono.fromFuture(filmActorService.getFilmActorsByFilmIds(filmIds))
-                .map(filmActors -> films.stream()
-                        .collect(toMap(film -> film,
-                                film -> filmActors.stream()
-                                        .filter(filmActor -> Integer.valueOf(filmActor.getFilmId().intValue()).equals(film.getId()))
-                                        .collect(Collectors.toSet()))));
+                .map(filmActors -> films.stream().collect(toMap(film -> film, film -> getMatchingActorsByFilmId(filmActors, film))));
+    }
+
+    private static Set<FilmActor> getMatchingActorsByFilmId(Set<FilmActor> filmActors, Film film) {
+        return filmActors.stream()
+                .filter(filmActor -> Integer.valueOf(filmActor.getFilmId().intValue()).equals(film.getId()))
+                .collect(Collectors.toSet());
     }
 
     @BatchMapping(typeName = "FilmActor2", value = "id")
@@ -79,11 +81,13 @@ public class ActorGQController {
     public Mono<Map<FilmActor, Actor>> actor(Set<FilmActor> filmActors) {
         var actorIds = filmActors.stream().map(FilmActor::getId).map(FilmActorId::getActorId).collect(Collectors.toSet());
         return Mono.fromFuture(actorService.getActorsByActorId(actorIds))
-                .map(actors -> filmActors.stream()
-                        .collect(toMap(filmActor -> filmActor,
-                                fa -> actors.stream()
-                                        .filter(actor -> actor.getId().equals(fa.getId().getActorId().intValue()))
-                                        .findFirst()
-                                        .orElse(new Actor()))));
+                .map(actors -> filmActors.stream().collect(toMap(filmActor -> filmActor, fa -> getMatchingActorsByActorId(actors, fa))));
+    }
+
+    private static Actor getMatchingActorsByActorId(Set<Actor> actors, FilmActor fa) {
+        return actors.stream()
+                .filter(actor -> actor.getId().equals(fa.getId().getActorId().intValue()))
+                .findFirst()
+                .orElse(new Actor());
     }
 }
