@@ -31,15 +31,15 @@ public class SpringCacheConfig {
             @Nonnull
             @Override
             protected Cache createConcurrentMapCache(@Nonnull String name) {
-                return new ConcurrentMapCollectionHandlingDecoratedCache(super.createConcurrentMapCache(name));
+                return new ConcurrentMapCollectionCache(super.createConcurrentMapCache(name));
             }
         };
     }
 
     @SuppressWarnings("unchecked")
-    protected static class ConcurrentMapCollectionHandlingDecoratedCache extends CollectionHandlingDecoratedCache {
+    protected static class ConcurrentMapCollectionCache extends CollectionCache {
 
-        protected ConcurrentMapCollectionHandlingDecoratedCache(final Cache cache) {
+        protected ConcurrentMapCollectionCache(final Cache cache) {
             super(cache);
         }
 
@@ -52,11 +52,11 @@ public class SpringCacheConfig {
         }
     }
 
-    protected abstract static class CollectionHandlingDecoratedCache implements Cache {
+    protected abstract static class CollectionCache implements Cache {
 
         private final Cache cache;
 
-        protected CollectionHandlingDecoratedCache(Cache cache) {
+        protected CollectionCache(Cache cache) {
 
             Assert.notNull(cache, "Cache must not be null");
 
