@@ -18,8 +18,8 @@ public interface AddressRepository extends ListCrudRepository<Address, Integer> 
     @NotNull
     @Query(nativeQuery = true, value = " SELECT " +
             " addr.address_id as id, " +
-            " addr.address, " +
-            " addr.address2, " +
+            " addr.address as addressLine, " +
+            " addr.address2 as addressLine2, " +
             " addr.district, " +
             " addr.city_id AS cityId, " +
             " addr.postal_code AS postalCode, " +
@@ -31,8 +31,8 @@ public interface AddressRepository extends ListCrudRepository<Address, Integer> 
 
     @Query(nativeQuery = true, value = " SELECT " +
             " addr.address_id as id, " +
-            " addr.address, " +
-            " addr.address2, " +
+            " addr.address as addressLine, " +
+            " addr.address2 as addressLine2, " +
             " addr.district, " +
             " addr.city_id AS cityId, " +
             " addr.postal_code AS postalCode, " +

@@ -13,7 +13,7 @@ public interface CityRepository extends ListCrudRepository<City, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT " +
             " c.city_id as id, " +
-            " c.city, " +
+            " c.city as name, " +
             " c.country_id AS countryId " +
             " FROM public.city c " +
             " WHERE c.city_id = :cityId ")
