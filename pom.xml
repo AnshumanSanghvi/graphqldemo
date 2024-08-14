@@ -23,19 +23,20 @@
         <!-- dependency versions -->
         <aspectj.version>1.9.19</aspectj.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <disruptor.version>3.4.4</disruptor.version>
         <graphql-java.version>20.4</graphql-java.version>
         <graphql-spqr-spring-boot-starter.version>0.0.7</graphql-spqr-spring-boot-starter.version>
         <hibernate-types.version>2.21.1</hibernate-types.version>
         <hibernate.validator.version>6.2.5.Final</hibernate.validator.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <lombok.version>1.18.34</lombok.version>
         <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
         <postgres.version>42.6.0</postgres.version>
         <r2dbc-postgresql.version>1.0.1.RELEASE</r2dbc-postgresql.version>
         <snake-yaml.version>2.0</snake-yaml.version>
         <spring-boot.version>3.1.1</spring-boot.version>
         <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <disruptor.version>3.4.4</disruptor.version>
     </properties>
 
     <dependencies>
@@ -160,6 +161,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
