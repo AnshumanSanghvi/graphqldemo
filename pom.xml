@@ -37,6 +37,7 @@
         <snake-yaml.version>2.0</snake-yaml.version>
         <spring-boot.version>3.1.1</spring-boot.version>
         <spring-data-rest-hal-explorer.version>4.1.1</spring-data-rest-hal-explorer.version>
+        <hibernate-enhance-maven-plugin.version>6.6.0.Final</hibernate-enhance-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -250,7 +251,7 @@
             <plugin>
                 <groupId>org.hibernate.orm.tooling</groupId>
                 <artifactId>hibernate-enhance-maven-plugin</artifactId>
-                <version>6.2.4.Final</version>
+                <version>${hibernate-enhance-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <configuration>
