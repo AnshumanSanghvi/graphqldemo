@@ -3,15 +3,14 @@ package com.anshuman.graphqldemo.service;
 import com.anshuman.graphqldemo.model.entity.Film;
 import com.anshuman.graphqldemo.model.mapper.FilmMapper;
 import com.anshuman.graphqldemo.model.repository.FilmRepository;
-import com.anshuman.graphqldemo.resource.dto.FilmRecord;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -22,16 +21,13 @@ public class FilmService {
     private final FilmMapper filmMapper;
 
     @Cacheable(value = "filmWithDetails", key = "#title")
-    public List<FilmRecord> getFilmsDetailedByTitle(String title) {
-        return filmMapper.toDtoList(filmRepository.customGetFilmDetailed(title));
+    public CompletableFuture<List<Film>> getFilmsDetailedByTitle(String title) {
+        return filmRepository.customGetFilmDetailed(title);
     }
 
     @Cacheable(value = "films", key = "#title")
-    public List<FilmRecord> getFilmRecordsByTitle(String title) {
-        return filmMapper.toDtoList(new ArrayList<>(filmRepository.getFilmsByTitle(title)));
-    }
-
-    public Set<Film> getFilmsByTitle(String title) {
+    public CompletableFuture<Set<Film>> getFilmsByTitle(String title) {
         return filmRepository.getFilmsByTitle(title);
     }
+
 }
