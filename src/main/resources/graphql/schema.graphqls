@@ -1,36 +1,3 @@
-type Film2 {
-    id: Int!
-    title: String
-    description: String
-    releaseYear: Int
-    length: Int
-    fullText: String
-    rating: MPAA_Rating
-    language: Language
-    filmCategories: [FilmCategory2]
-    filmActors: [FilmActor2]
-}
-
-type FilmCategory2 {
-    id: FilmCategoryId2!
-    category: Category
-}
-
-type FilmCategoryId2 {
-    film_id: Int!
-    category_id: Int!
-}
-
-type FilmActor2 {
-    id: FilmActorId2!
-    actor: Actor
-}
-
-type FilmActorId2 {
-    actor_id: Int!
-    film_id: Int!
-}
-
 type Film {
     id: Int!
     title: String
@@ -148,8 +115,6 @@ type Query {
     ## query using JPQL query
     getFilmsByTitle(title: String!): [Film]
 
-    getFilms2ByTitle(title: String!): [Film2]
-
     getFilmsDetailedByTitle(title: String!): [Film]
 
     ## query on a different root node
@@ -159,7 +124,7 @@ type Query {
     getStaffByStoreId(storeId: Int!): [StoreStaff]
 
     ## query on view, multiple parameters, pagination
-    getActorInfoByName(pageNumber: Int!, pageSize: Int!, name: String!): [ActorInfo]
+    getActorInfoByName(name: String!): [ActorInfo]
 
     ## query that calls a postgresql function (sp) using hibernate native query
     getInventoryInStock(filmId: Int!, storeId: Int!): [Int]
