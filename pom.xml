@@ -12,7 +12,8 @@
     <artifactId>GraphQLDemo</artifactId>
     <version>1.0</version>
     <name>GraphQLDemo</name>
-    <description>GraphQLDemo</description>
+    <description>Demo application for GraphQL using spring boot graphql</description>
+    <url>https://github.com/AnshumanSanghvi/graphqldemo</url>
 
     <properties>
         <java.version>21</java.version>
