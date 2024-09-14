@@ -46,7 +46,7 @@ public class LoggingAspect {
 
         String methodName = joinPoint.getSignature().getName();
 
-        log.debug("{}.{}, args: {{}}, running on {}, took {} ms", className, methodName, getMethodArgs(joinPoint),
+        log.debug("method {}.{}, with args: {{}}, running on {}, took {} ms", className, methodName, getMethodArgs(joinPoint),
                 Thread.currentThread().isVirtual() ? "Virtual thread with id: " +
                 Thread.currentThread().threadId() : "Platform thread with name: " + Thread.currentThread().getName(),
                 end.toEpochMilli() - start.toEpochMilli());
